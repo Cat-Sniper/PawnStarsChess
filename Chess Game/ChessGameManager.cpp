@@ -40,7 +40,7 @@ void ChessGameManager::Render()
 
 
 /// <summary>
-/// 
+/// Cleanup for when we close the program
 /// </summary>
 void ChessGameManager::Shutdown()
 {
