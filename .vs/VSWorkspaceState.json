@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Chess Game"
+    "\\Chess Game",
+    "\\Chess Game\\GameStates"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\Chess Game\\ChessGameManager.cpp",
   "PreviewInSolutionExplorer": false
 }
