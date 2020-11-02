@@ -19,15 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="ChessGameManager.cpp" />
+    <ClCompile Include="ChessPiece.cpp" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Queen.cpp" />
+    <ClCompile Include="Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bishop.h" />
     <ClInclude Include="ChessGameManager.h" />
+    <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="GameStates\GameState.h" />
     <ClInclude Include="GlobalTypes.h" />
+    <ClInclude Include="King.h" />
+    <ClInclude Include="Knight.h" />
+    <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Queen.h" />
+    <ClInclude Include="Rook.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
