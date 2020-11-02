@@ -2,7 +2,7 @@
 #include <cstddef> //for NULL
 
 //is the cell white/black
-
+//add constructors?
 
 
 
@@ -11,7 +11,7 @@ class Cell
 public:
 	Color BoardColor;
 
-	//ChessPiece  currentChessPiece = NULL; //all cells start without any chess pieces, but a chess piece can be added with a method
+	ChessPiece currentChessPiece = NULL; //all cells start without any chess pieces, but a chess piece can be added with a method
 
 
 public:
@@ -29,9 +29,9 @@ public:
 		BoardColor.b = 0;
 	}
 
-	void addChessPiece(ChessPiece type)
+	void addChessPiece(ChessPiece type)//could be created by the ChessPiece class
 	{
-		//this.currentChessPiece = type;
+		this.currentChessPiece = type;
 	}
 
 	bool isOccupied(int cellLocation)
