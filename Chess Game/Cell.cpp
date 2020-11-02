@@ -1,4 +1,4 @@
-#include "GlobalTypes.h"
+#include "Cell.h"
 #include <cstddef> //for NULL
 
 //is the cell white/black
@@ -9,51 +9,45 @@
 class Cell
 {
 public:
-	Color BoardColor;
-
+	Color boardColor;
+	bool isOccupied;
 	ChessPiece currentChessPiece = NULL; //all cells start without any chess pieces, but a chess piece can be added with a method
 
 
 public:
-	void setWhite()
+	Cell() //default constructor
 	{
-		BoardColor.r = 255;
-		BoardColor.r = 255;
-		BoardColor.r = 255;
+		isOccupied = false;
+		currentChessPiece = NULL;
+	}
+	~Cell() //default destructor
+	{
+
+	}
+	void SetWhite()
+	{
+		boardColor.r = 255;
+		boardColor.r = 255;
+		boardColor.r = 255;
 	}
 
-	void setBlack()
+	void SetBlack()
 	{
-		BoardColor.r = 0;
-		BoardColor.g = 0;
-		BoardColor.b = 0;
+		boardColor.r = 0;
+		boardColor.g = 0;
+		boardColor.b = 0;
 	}
 
-	void addChessPiece(ChessPiece type)//could be created by the ChessPiece class
+	void AddChessPiece(ChessPiece piece)//could be created by the ChessPiece class
 	{
-		this.currentChessPiece = type;
+		currentChessPiece = piece;
+		isOccupied = true;
 	}
 
-	bool isOccupied(int cellLocation)
+	void RemoveChessPiece()
 	{
-		if (this.currentChessPiece = NULL)
-			return false;
-		else
-			return true;
+		currentChessPiece = NULL;
 	}
+};
 
-
-
-
-}
-
-int main()
-{
-
-}
-
-
-
-
-//is there a chess piece currently on this cell? -- WHAT METHOD AM I CODING?
 

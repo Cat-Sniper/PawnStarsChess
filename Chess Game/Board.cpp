@@ -1,4 +1,5 @@
 #include <string>
+#include "Board.h"
 //MUST INCLUDE CHESSPIECE FILES
 
 //cell board array
@@ -13,7 +14,7 @@
 class ChessBoard
 {
 public:
-	Cell [8][8] board;
+	Cell board[8][8];
 
 
 public:
@@ -25,9 +26,9 @@ public:
 			{
 				if(isEven(i,j)) //COLORS THE BOARD
 				{ 
-					board[i][j].setBlack();
+					board[i][j].SetBlack();
 				}
-				else board[i][j].setWhite();
+				else board[i][j].SetWhite();
 
 				if (i == 0 || i == 1) //if within the first row (where white pieces are)
 				{
