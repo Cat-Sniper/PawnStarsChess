@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
+#include "Board.h" //board.h contains cell.h so non eed to call it
 
 int main()
 {
-	cout << "Hello World!";
-	return 0;
+	ChessBoard testBoard;
+
+	testBoard.boardInit(testBoard.board);
 }

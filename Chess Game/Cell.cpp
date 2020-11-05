@@ -20,10 +20,12 @@ public:
 		isOccupied = false;
 		currentChessPiece = NULL;
 	}
+
 	~Cell() //default destructor
 	{
 
 	}
+
 	void SetWhite()
 	{
 		boardColor.r = 255;
