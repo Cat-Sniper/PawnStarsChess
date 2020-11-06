@@ -29,8 +29,8 @@ public:
 	void SetWhite()
 	{
 		boardColor.r = 255;
-		boardColor.r = 255;
-		boardColor.r = 255;
+		boardColor.g = 255;
+		boardColor.b = 255;
 	}
 
 	void SetBlack()

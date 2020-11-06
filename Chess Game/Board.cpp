@@ -27,7 +27,7 @@ class ChessBoard
 			{
 				for (int j = 0; j < 8; j++)
 				{
-					if(isEven(i,j)) //COLORS THE BOARD
+					if(isEven(i,j)) //COLORS THE BOARD ROW BY ROW
 					{ 
 						board[i][j].SetBlack();
 					}
