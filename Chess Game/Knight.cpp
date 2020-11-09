@@ -4,7 +4,7 @@ int isOutOfBounds(Position pos, int x, int y) {
     return !((pos.x >= 0) && (pos.y >= 0) && (pos.x < x) && (pos.y < y));
 }
 
-std::vector<Position> Knight::highlightMoves(Position current, int boardWidth = 8, int boardLength = 8) {
+std::vector<Position> Knight::highlightMoves(Position current, int boardWidth, int boardLength) {
     std::vector<Position> ret;
 
     ret.push_back(Position{ current.x - 2, current.y - 1 });

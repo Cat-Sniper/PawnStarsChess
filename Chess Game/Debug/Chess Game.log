@@ -1,32 +1,5 @@
-﻿  Cell.cpp
-  ChessPiece.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.cpp(40,85): error C2572: 'ChessPiece::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.h(86): message : see declaration of 'ChessPiece::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.cpp(40,106): error C2572: 'ChessPiece::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.h(86): message : see declaration of 'ChessPiece::highlightMoves'
-  King.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\King.cpp(7,79): error C2572: 'King::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\King.h(5): message : see declaration of 'King::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\King.cpp(7,100): error C2572: 'King::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\King.h(5): message : see declaration of 'King::highlightMoves'
-  Knight.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.cpp(7,81): error C2572: 'Knight::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.h(6): message : see declaration of 'Knight::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.cpp(7,102): error C2572: 'Knight::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.h(6): message : see declaration of 'Knight::highlightMoves'
-  Pawn.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.cpp(3,79): error C2572: 'Pawn::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.h(13): message : see declaration of 'Pawn::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.cpp(3,100): error C2572: 'Pawn::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.h(13): message : see declaration of 'Pawn::highlightMoves'
-  Queen.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Queen.cpp(3,80): error C2572: 'Queen::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Queen.h(5): message : see declaration of 'Queen::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Queen.cpp(3,101): error C2572: 'Queen::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Queen.h(5): message : see declaration of 'Queen::highlightMoves'
+﻿  Queen.cpp
   Rook.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Rook.cpp(3,79): error C2572: 'Rook::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Rook.h(5): message : see declaration of 'Rook::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Rook.cpp(3,100): error C2572: 'Rook::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Rook.h(5): message : see declaration of 'Rook::highlightMoves'
   Generating Code...
+Knight.obj : error LNK2005: "int __cdecl isOutOfBounds(struct Position,int,int)" (?isOutOfBounds@@YAHUPosition@@HH@Z) already defined in King.obj
+C:\Users\Ashraf\Source\Repos\Cat-Sniper\PawnStarsChess\Chess Game\Debug\Chess Game.exe : fatal error LNK1169: one or more multiply defined symbols found
