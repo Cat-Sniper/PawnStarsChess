@@ -1,5 +1,12 @@
 #include <string>
 #include "Board.h"
+#include "Bishop.h"
+#include "ChessPiece.h"
+#include "King.h"
+#include "Knight.h"
+#include "Pawn.h"
+#include "Queen.h"
+#include "Rook.h"
 //MUST INCLUDE CHESSPIECE FILES
 
 //cell board array
@@ -66,16 +73,45 @@ bool ChessBoard::IsEven(int i, int j)
 	else return false;
 }
 
-/*ChessPiece ChessBoard::CreateChessPiece(std::string pieceType, int playerID)
+ChessPiece ChessBoard::CreateChessPiece(std::string pieceType, int playerID)
 {
-	if (pieceType == "rook")
+	
+	if (pieceType == "bishop")
 	{
-		ChessPiece piece = new
+		Bishop piece;
+		return piece;
+
 	}
+	else if (pieceType == "king")
+	{
+		King piece;
+		return piece;
+	}
+	else if (pieceType == "knight")
+	{
+		Knight piece;
+		return piece;
+	}
+	else if (pieceType == "pawn")
+	{
+		Pawn piece;
+		return piece;
+	}
+	else if (pieceType == "queen")
+	{
+		Queen piece;
+		return piece;
+	}
+	else if (pieceType == "rook")
+	{
+		Rook piece;
+		return piece;
+	}
+	
 }
 
 
-ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the column (PASS j) it will create the subsequent chess piece
+/*ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the column (PASS j) it will create the subsequent chess piece
 {
 	switch (columnPosition)
 	{
