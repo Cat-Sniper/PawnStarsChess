@@ -6,50 +6,40 @@
 
 
 
-class Cell
+Cell::Cell() //default constructor
 {
-public:
-	Color boardColor;
-	bool isOccupied;
-	ChessPiece currentChessPiece = NULL; //all cells start without any chess pieces, but a chess piece can be added with a method
+	isOccupied = false;
+	currentChessPiece = NULL; //all cells start without any chess pieces, but a chess piece can be added with a method
+}
 
+Cell::~Cell() //default destructor
+{
 
-public:
-	Cell() //default constructor
-	{
-		isOccupied = false;
-		currentChessPiece = NULL;
-	}
-
-	~Cell() //default destructor
-	{
-
-	}
-
-	void SetWhite()
-	{
-		boardColor.r = 255;
-		boardColor.g = 255;
-		boardColor.b = 255;
-	}
-
-	void SetBlack()
-	{
-		boardColor.r = 0;
-		boardColor.g = 0;
-		boardColor.b = 0;
-	}
-
-	void AddChessPiece(ChessPiece piece)//could be created by the ChessPiece class
-	{
-		currentChessPiece = piece;
-		isOccupied = true;
-	}
-
-	void RemoveChessPiece()
-	{
-		currentChessPiece = NULL;
-	}
 };
+
+void Cell::SetWhite()
+{
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+}
+
+void Cell::SetBlack()
+{
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+}
+
+void Cell::AddChessPiece(ChessPiece piece)//could be created by the ChessPiece class
+{
+	currentChessPiece = piece;
+	isOccupied = true;
+}
+
+void Cell::RemoveChessPiece()
+{
+	currentChessPiece = NULL;
+}
 
 

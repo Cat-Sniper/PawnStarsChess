@@ -5,7 +5,7 @@
 class Cell
 {
 	public:
-		Color boardColor;
+		Color color;
 		bool isOccupied;
 		ChessPiece currentChessPiece;
 

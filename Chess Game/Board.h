@@ -10,8 +10,8 @@ class ChessBoard
 	public:
 		ChessBoard();
 		~ChessBoard();
-		void boardInit(Cell board[8][8]);
-		bool isEven(int i, int j);
+		void BoardInit(Cell board[8][8]);
+		bool IsEven(int i, int j);
 		ChessPiece CreateBTRow(int columnPosition);
 		ChessPiece CreateChessPiece(std::string pieceType, int playerID);
 		ChessPiece CreatePawn();

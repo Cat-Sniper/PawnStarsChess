@@ -1,32 +1,4 @@
-﻿  ashraftest.cpp
-  Bishop.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Bishop.cpp(3,81): error C2572: 'Bishop::highlightMoves': redefinition of default argument: parameter 1
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Bishop.h(5): message : see declaration of 'Bishop::highlightMoves'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Bishop.cpp(3,102): error C2572: 'Bishop::highlightMoves': redefinition of default argument: parameter 2
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Bishop.h(5): message : see declaration of 'Bishop::highlightMoves'
-  Board.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.h(8,8): error C2059: syntax error: '['
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.h(8,15): error C2238: unexpected token(s) preceding ';'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(17,7): error C2059: syntax error: '['
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(17,19): error C2238: unexpected token(s) preceding ';'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(29,18): error C2039: 'setBlack': is not a member of 'Cell'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Cell.h(5): message : see declaration of 'Cell'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(31,22): error C2039: 'setWhite': is not a member of 'Cell'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Cell.h(5): message : see declaration of 'Cell'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(73,1): error C2664: 'ChessPiece::ChessPiece(const ChessPiece &)': cannot convert argument 1 from 'const char [5]' to 'int'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(73,39): message : There is no context in which this conversion is possible
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.h(23,5): message : see declaration of 'ChessPiece::ChessPiece'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(78,38): error C2664: 'ChessPiece::ChessPiece(const ChessPiece &)': cannot convert argument 1 from 'const char [1]' to 'int'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(78,39): message : There is no context in which this conversion is possible
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.h(23,5): message : see declaration of 'ChessPiece::ChessPiece'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(79,4): error C2143: syntax error: missing ';' before '}'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(80,1): warning C4060: switch statement contains no 'case' or 'default' labels
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(89,1): error C2059: syntax error: '}'
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(89,1): error C2143: syntax error: missing ';' before '}'
-  Cell.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Cell.cpp(10,1): error C2011: 'Cell': 'class' type redefinition
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Cell.h(5): message : see declaration of 'Cell'
-  ChessGameManager.cpp
+﻿  Cell.cpp
   ChessPiece.cpp
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.cpp(40,85): error C2572: 'ChessPiece::highlightMoves': redefinition of default argument: parameter 1
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\ChessPiece.h(86): message : see declaration of 'ChessPiece::highlightMoves'
@@ -42,7 +14,6 @@ C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.cpp(7,8
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.h(6): message : see declaration of 'Knight::highlightMoves'
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.cpp(7,102): error C2572: 'Knight::highlightMoves': redefinition of default argument: parameter 2
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Knight.h(6): message : see declaration of 'Knight::highlightMoves'
-  main.cpp
   Pawn.cpp
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.cpp(3,79): error C2572: 'Pawn::highlightMoves': redefinition of default argument: parameter 1
 C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Pawn.h(13): message : see declaration of 'Pawn::highlightMoves'
