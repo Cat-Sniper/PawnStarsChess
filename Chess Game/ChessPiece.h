@@ -70,6 +70,10 @@ public:
         return _hasMoved;
     }
 
+    inline int isOutOfBounds(Position pos, int x, int y) {
+        return !((pos.x >= 0) && (pos.y >= 0) && (pos.x < x) && (pos.y < y));
+    }
+
     /// <summary>
     /// this method calculates all the valid moves for this chess piece and returns a vector of board positions
     /// containing all the valid move positions. it does so without knowledge of the current state of the chess

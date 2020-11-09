@@ -1,6 +1,6 @@
 #include "Bishop.h"
 
-std::vector<Position> Bishop::highlightMoves(Position current, int boardWidth = 8, int boardLength = 8) {
+std::vector<Position> Bishop::highlightMoves(Position current, int boardWidth, int boardLength) {
     std::vector<Position> ret;
     Position next = current;
     while (next.x < boardWidth && next.y < boardLength) {

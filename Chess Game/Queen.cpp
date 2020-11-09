@@ -1,6 +1,6 @@
 #include "Queen.h"
 
-std::vector<Position> Queen::highlightMoves(Position current, int boardWidth = 8, int boardLength = 8) {
+std::vector<Position> Queen::highlightMoves(Position current, int boardWidth, int boardLength) {
     std::vector<Position> ret;
     
     // combine bishop and rook
