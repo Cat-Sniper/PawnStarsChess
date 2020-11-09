@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-std::vector<Position> Pawn::highlightMoves(Position current, int boardWidth = 8, int boardLength = 8) {
+std::vector<Position> Pawn::highlightMoves(Position current, int boardWidth, int boardLength) {
     std::vector<Position> ret;
     Position next = current;
     if (getPlayerID() == 0) {  // black pieces
