@@ -13,7 +13,8 @@ class ChessBoard
 		void BoardInit(Cell board[8][8]);
 		bool IsEven(int i, int j);
 		ChessPiece CreateBTRow(int columnPosition);
-		ChessPiece CreateChessPiece(std::string pieceType, int playerID);
-		ChessPiece CreatePawn();
+		ChessPiece CreateChessPiece(std::string pieceType);
+		void HighlightMoves(ChessPiece piece, Position current, int boardWidth, int boardLength);
+
 
 };

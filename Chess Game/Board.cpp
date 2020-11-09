@@ -7,7 +7,6 @@
 #include "Pawn.h"
 #include "Queen.h"
 #include "Rook.h"
-//MUST INCLUDE CHESSPIECE FILES
 
 //cell board array
 //highlight move method, reach into the cell and the currentchesspiece to figure out possible moves (using the piece's position)
@@ -41,23 +40,31 @@ void ChessBoard::BoardInit(Cell board[8][8])
 			}
 			else board[i][j].SetWhite();
 
-			if (i == 0 || i == 1) //if within the first row (where white pieces are)
+			if (i == 0 || i == 1 || i == 6 || i == 7) //if within the furst two rows or the last two rows.
 			{
 				switch (i)
 				{
-				case 0: //fill pieces rook to rook
-					//board[i][j].currentChessPiece = CreateBTRow(j);
+					//CASE 0 AND 1 ARE FOR PLAYER 0 (WHITE)
+				case 0: //fill bottom row, passing the column as the argument
+					board[i][j].AddChessPiece(CreateBTRow(j));
 					break;
 				case 1:
-					//board[i][j].currentChessPiece = CreatePawnRow();
+					board[i][j].AddChessPiece(CreateChessPiece("pawn"));
 					break;
+
+					//CASE 6 AND 7 ARE FOR PLAYER 1 (BLACK)
+				case 6:
+					board[i][j].AddChessPiece(CreateChessPiece("pawn"));
+					break;
+				case 7:
+					board[i][j].AddChessPiece(CreateBTRow(j));
+					break;
+				default: //SHOULD I KEEP THIS?
+					board[i][j].RemoveChessPiece();
 				}
 
 			}
-			if (i == 6 || i == 7) //do I instantiate a chesspiece for each case and insert it into the function? - Also have to make switch cases for each piece
-			{
 
-			}
 		}
 
 	}
@@ -73,7 +80,7 @@ bool ChessBoard::IsEven(int i, int j)
 	else return false;
 }
 
-ChessPiece ChessBoard::CreateChessPiece(std::string pieceType, int playerID)
+ChessPiece ChessBoard::CreateChessPiece(std::string pieceType)
 {
 	
 	if (pieceType == "bishop")
@@ -111,31 +118,36 @@ ChessPiece ChessBoard::CreateChessPiece(std::string pieceType, int playerID)
 }
 
 
-/*ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the column (PASS j) it will create the subsequent chess piece
+ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
 {
 	switch (columnPosition)
 	{
-		if (columnPosition == 0 || columnPosition == 7) //rook
+		if (columnPosition == 0 || columnPosition == 7) 
 		{
-			ChessPiece piece = new ChessPiece("rook");
-			return piece;
+			return CreateChessPiece("rook");
 		}
 		else if (columnPosition == 1 || columnPosition == 6)
 		{
-			ChessPiece piece = new ChessPiece("")
+			return CreateChessPiece("knight");
 		}
+		else if (columnPosition == 2 || columnPosition == 5)
+		{
+			return CreateChessPiece("bishop");
+		}
+		else if (columnPosition == 3)
+		{
+			return CreateChessPiece("queen");
+		}
+		else if (columnPosition == 4)
+		{
+			return CreateChessPiece("king");
+		}
+		
 	}
 }
 
-/*ChessPiece ChessBoard::CreatePawn()
+void ChessBoard::HighlightMoves(ChessPiece piece, Position current, int boardWidth, int boardLength)
+{
 
+}
 
-		/*ChessPiece CreatePawn()
-		{
-		}
-		
-
-
-
-
-};*/

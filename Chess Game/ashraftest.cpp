@@ -12,7 +12,12 @@ int main()
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			Color cellColor = testBoard.board[i][j].color;
+			/*Color cellColor = testBoard.board[i][j].color;
+			std::cout << cellColor.r;
+			std::cout << cellColor.g;
+			std::cout << cellColor.b;*/
+
+			std::cout << testBoard.board[i][j].isOccupied;
 		}
 	}
 
