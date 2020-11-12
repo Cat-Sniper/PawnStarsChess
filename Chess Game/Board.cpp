@@ -14,18 +14,14 @@
 //questions: how do I merge since my Branch is behind on updates?
 //do I allocate on the heap? Is that the only way?
 //finish highlight moves class
-//have to close soln file 
-
-
+//have to close soln file
 
 ChessBoard::ChessBoard()
 {
-
 }
 
 ChessBoard::~ChessBoard()
 {
-
 }
 
 void ChessBoard::BoardInit(Cell board[8][8])
@@ -38,7 +34,8 @@ void ChessBoard::BoardInit(Cell board[8][8])
 			{
 				board[i][j].SetBlack();
 			}
-			else board[i][j].SetWhite();
+			else
+				board[i][j].SetWhite();
 
 			if (i == 0 || i == 1 || i == 6 || i == 7) //if within the furst two rows or the last two rows.
 			{
@@ -62,13 +59,9 @@ void ChessBoard::BoardInit(Cell board[8][8])
 				default: //SHOULD I KEEP THIS?
 					board[i][j].RemoveChessPiece();
 				}
-
 			}
-
 		}
-
 	}
-
 }
 
 bool ChessBoard::IsEven(int i, int j)
@@ -77,17 +70,17 @@ bool ChessBoard::IsEven(int i, int j)
 	{
 		return true;
 	}
-	else return false;
+	else
+		return false;
 }
 
 ChessPiece ChessBoard::CreateChessPiece(std::string pieceType)
 {
-	
+
 	if (pieceType == "bishop")
 	{
 		Bishop piece;
 		return piece;
-
 	}
 	else if (pieceType == "king")
 	{
@@ -114,15 +107,13 @@ ChessPiece ChessBoard::CreateChessPiece(std::string pieceType)
 		Rook piece;
 		return piece;
 	}
-	
 }
 
-
-ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
+ChessPiece ChessBoard::CreateBTRow(int columnPosition) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
 {
 	switch (columnPosition)
 	{
-		if (columnPosition == 0 || columnPosition == 7) 
+		if (columnPosition == 0 || columnPosition == 7)
 		{
 			return CreateChessPiece("rook");
 		}
@@ -142,12 +133,21 @@ ChessPiece ChessBoard::CreateBTRow(int columnPosition)//based on position in the
 		{
 			return CreateChessPiece("king");
 		}
-		
 	}
 }
 
-void ChessBoard::HighlightMoves(ChessPiece piece, Position current, int boardWidth, int boardLength)
+std::vector<Position> ChessBoard::HighlightMoves(ChessPiece piece, Position current, int boardWidth, int boardLength, ChessBoard gameBoard)
 {
+	std::vector<Position> moveList = piece.highlightMoves(current, boardWidth, boardLength);
 
+	for (int i = 0; i < moveList.size(); i++)
+	{
+		Position pos = moveList[i]; // if it's occupied by the same player
+		if (gameBoard.board[pos.x][pos.y].isOccupied && gameBoard.board[pos.x][pos.y].currentChessPiece.getPlayerID() == piece.getPlayerID())
+		{
+			moveList.erase(moveList.begin()); //remove the position from the list of positions
+		}
+	}
+
+	return moveList;
 }
-
