@@ -62,6 +62,10 @@ public:
         _hasMoved = 1;
     }
 
+    inline void reset() {
+        _hasMoved = 0;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -89,7 +93,7 @@ public:
     /// <returns> without overriding, this returns an empty vector. </returns>
     virtual std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
 
-private:
+protected:
     // ChessBoard* chessboard;  <- should not be a dependency; i'm not sure we need this
     int _playerID;
     Color _materialColor;

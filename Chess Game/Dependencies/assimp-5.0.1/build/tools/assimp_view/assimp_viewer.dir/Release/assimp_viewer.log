@@ -1,0 +1,22 @@
+﻿  Building Custom Rule D:/assimp-5.0.1/assimp-5.0.1/tools/assimp_view/CMakeLists.txt
+  AnimEvaluator.cpp
+  Background.cpp
+  Display.cpp
+  HelpDialog.cpp
+  Input.cpp
+  LogDisplay.cpp
+  LogWindow.cpp
+  Material.cpp
+  MeshRenderer.cpp
+  MessageProc.cpp
+  Normals.cpp
+  SceneAnimator.cpp
+  Shaders.cpp
+  assimp_view.cpp
+  stdafx.cpp
+D:\assimp-5.0.1\assimp-5.0.1\tools\assimp_view\Display.cpp(278,37): warning C4267: '=': conversion from 'size_t' to 'ai_uint32', possible loss of data
+D:\assimp-5.0.1\assimp-5.0.1\tools\assimp_view\Material.cpp(290,54): warning C4267: '=': conversion from 'size_t' to 'ai_uint32', possible loss of data
+D:\assimp-5.0.1\assimp-5.0.1\tools\assimp_view\Material.cpp(304,50): warning C4267: '=': conversion from 'size_t' to 'ai_uint32', possible loss of data
+D:\assimp-5.0.1\assimp-5.0.1\tools\assimp_view\Material.cpp(395,62): warning C4267: '=': conversion from 'size_t' to 'ai_uint32', possible loss of data
+D:\assimp-5.0.1\assimp-5.0.1\tools\assimp_view\Material.cpp(410,34): warning C4267: '=': conversion from 'size_t' to 'ai_uint32', possible loss of data
+  assimp_viewer.vcxproj -> D:\assimp-5.0.1\build\tools\assimp_view\Release\assimp_viewer.exe
