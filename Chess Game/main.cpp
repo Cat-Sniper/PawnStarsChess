@@ -105,7 +105,7 @@ constexpr glm::mat4 identity = glm::mat4(1.0f);
 int main() {
 	
 #pragma region _setup
-	std::string relativePath = "D:/Code Monkeys/PawnStarsChess/Chess Game/Dependencies/";
+	std::string relativePath = "../Chess Game/Dependencies/";
 
 	if (!glfwInit()) return -1;
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

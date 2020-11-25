@@ -1,4 +1,4 @@
 ﻿  main.cpp
-D:\Code Monkeys\PawnStarsChess\Chess Game\main.cpp(374,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Code Monkeys\PawnStarsChess\Chess Game\main.cpp(415,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Chess Game.vcxproj -> D:\Code Monkeys\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(374,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(415,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Chess Game.vcxproj -> F:\Repos\PawnStars\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe

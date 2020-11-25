@@ -1,0 +1,11 @@
+prefix=F:/Repos/PawnStars/PawnStarsChess/Chess Game/Dependencies/assimp-5.0.1/assimp-5.0.1/out/install/x64-Debug (default)
+exec_prefix=F:/Repos/PawnStars/PawnStarsChess/Chess Game/Dependencies/assimp-5.0.1/assimp-5.0.1/out/install/x64-Debug (default)/
+libdir=F:/Repos/PawnStars/PawnStarsChess/Chess Game/Dependencies/assimp-5.0.1/assimp-5.0.1/out/install/x64-Debug (default)/lib
+includedir=F:/Repos/PawnStars/PawnStarsChess/Chess Game/Dependencies/assimp-5.0.1/assimp-5.0.1/out/install/x64-Debug (default)/../include/include
+
+Name: Assimp
+Description: Import various well-known 3D model formats in an uniform manner.
+Version: 5.0.0
+Libs: -L${libdir} -lassimp
+Libs.private:  
+Cflags: -I${includedir}
