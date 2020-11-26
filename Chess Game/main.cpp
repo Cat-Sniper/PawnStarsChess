@@ -338,12 +338,13 @@ int main() {
 	int base = 0;
 
 	while (!glfwWindowShouldClose(window)) {
+/*---------------------------UPDATE-----------------------------------------------*/
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(window);
 		view = glm::lookAt(cameraPos, glm::vec3(3.5f, 3.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
 
-		//render calls
+/*---------------------------RENDER-----------------------------------------------*/
 		boardShader.bind();
 		boardShader.setMat4Uniform("projection", glm::value_ptr(projection));
 		boardShader.setMat4Uniform("view", glm::value_ptr(view));

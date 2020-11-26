@@ -93,12 +93,22 @@ public:
     /// <returns> without overriding, this returns an empty vector. </returns>
     virtual std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
 
+    /// <summary>
+    /// Returns whether or not the piece is alive. If it isn't, it will no longer be updated or rendered.
+    /// </summary>
+    inline bool isAlive() { return _isAlive; }
+
+    /// <summary>
+    /// All the rendering stuff will be here.
+    /// </summary>
+    void Render();
 protected:
     // ChessBoard* chessboard;  <- should not be a dependency; i'm not sure we need this
     int _playerID;
     Color _materialColor;
     int _isAttacked;  // 1 if piece is under attack by an opposite piece, 0 otherwise.
     int _hasMoved;
+    bool _isAlive;     // should we even draw it?
 };
 
 #endif  // CHESSPIECE_H

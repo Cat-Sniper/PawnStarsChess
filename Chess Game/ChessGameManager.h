@@ -1,12 +1,16 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
+#include <vector>
+
 class GameState;
+class Player;
 
 class ChessGameManager {
 
 private:
-	GameState *m_currentGameState;
+	GameState *_currentGameState;
+	std::vector<Player*> _players;
 public:
 
 	ChessGameManager();
