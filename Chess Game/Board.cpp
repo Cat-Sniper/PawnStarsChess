@@ -74,42 +74,36 @@ bool ChessBoard::IsEven(int i, int j)
 		return false;
 }
 
-ChessPiece ChessBoard::CreateChessPiece(std::string pieceType)
+ChessPiece *ChessBoard::CreateChessPiece(std::string pieceType)
 {
 
 	if (pieceType == "bishop")
 	{
-		Bishop piece;
-		return piece;
+		return new Bishop();
 	}
 	else if (pieceType == "king")
 	{
-		King piece;
-		return piece;
+		return new King();
 	}
 	else if (pieceType == "knight")
 	{
-		Knight piece;
-		return piece;
+		return new Knight();
 	}
 	else if (pieceType == "pawn")
 	{
-		Pawn piece;
-		return piece;
+		return new Pawn();
 	}
 	else if (pieceType == "queen")
 	{
-		Queen piece;
-		return piece;
+		return new Queen();
 	}
 	else if (pieceType == "rook")
 	{
-		Rook piece;
-		return piece;
+		return new Rook();
 	}
 }
 
-ChessPiece ChessBoard::CreateBTRow(int columnPosition) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
+ChessPiece *ChessBoard::CreateBTRow(int columnPosition) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
 {
 	switch (columnPosition)
 	{
@@ -136,14 +130,14 @@ ChessPiece ChessBoard::CreateBTRow(int columnPosition) //based on position in th
 	}
 }
 
-std::vector<Position> ChessBoard::HighlightMoves(ChessPiece piece, Position current, int boardWidth, int boardLength, ChessBoard gameBoard)
+std::vector<Position> ChessBoard::HighlightMoves(ChessPiece *piece, Position current, int boardWidth, int boardLength, ChessBoard gameBoard)
 {
-	std::vector<Position> moveList = piece.highlightMoves(current, boardWidth, boardLength);
+	std::vector<Position> moveList = piece->highlightMoves(current, boardWidth, boardLength);
 
 	for (int i = 0; i < moveList.size(); i++)
 	{
 		Position pos = moveList[i]; // if it's occupied by the same player
-		if (gameBoard.board[pos.x][pos.y].isOccupied && gameBoard.board[pos.x][pos.y].currentChessPiece.getPlayerID() == piece.getPlayerID())
+		if (gameBoard.board[pos.x][pos.y].isOccupied && gameBoard.board[pos.x][pos.y].currentChessPiece->getPlayerID() == piece->getPlayerID())
 		{
 			moveList.erase(moveList.begin()); //remove the position from the list of positions
 		}

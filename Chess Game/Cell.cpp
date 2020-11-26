@@ -4,8 +4,6 @@
 //is the cell white/black
 //add constructors?
 
-
-
 Cell::Cell() //default constructor
 {
 	isOccupied = false;
@@ -13,9 +11,9 @@ Cell::Cell() //default constructor
 }
 
 Cell::~Cell() //default destructor
-{
+	{
 
-};
+	};
 
 void Cell::SetWhite()
 {
@@ -31,7 +29,7 @@ void Cell::SetBlack()
 	color.b = 0;
 }
 
-void Cell::AddChessPiece(ChessPiece piece)//could be created by the ChessPiece class
+void Cell::AddChessPiece(ChessPiece *piece) //could be created by the ChessPiece class
 {
 	currentChessPiece = piece;
 	isOccupied = true;
@@ -41,5 +39,3 @@ void Cell::RemoveChessPiece()
 {
 	currentChessPiece = NULL;
 }
-
-
