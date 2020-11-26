@@ -6,15 +6,18 @@
 *.lo
 *.o
 *.obj
+!Chess Game/Dependencies/*.obj
+
 
 # Precompiled Headers
 *.gch
 *.pch
+*.ipch
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+
 
 # Fortran module files
 *.mod
@@ -24,10 +27,17 @@
 *.lai
 *.la
 *.a
-*.lib
+
 
 # Executables
 *.exe
 *.out
 *.app
-/Chess Game/.vs/Chess Game/v16/Browse.VC.opendb
+Chess Game/.vs/Chess Game/v16/.suo
+*.db
+*.idb
+*.tlog
+Chess Game/.vs/Chess Game/v16/Browse.VC.db
+Chess Game/Debug
+Chess Game/x64/Debug/
+

@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Chess Game"
+    "\\Chess Game",
+    "\\Chess Game\\Dependencies",
+    "\\Chess Game\\Dependencies\\assimp-5.0.1\\build",
+    "\\Chess Game\\Dependencies\\assimp-5.0.1\\build\\code\\Release"
   ],
-  "SelectedNode": "\\Chess Game\\Board.cpp",
+  "SelectedNode": "\\Chess Game\\Dependencies\\Bishop.obj",
   "PreviewInSolutionExplorer": false
 }
