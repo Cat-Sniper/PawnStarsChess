@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ashraftest.cpp" />
     <ClCompile Include="Bishop.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="ChessGameManager.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
     <ClCompile Include="GameCell.cpp" />
@@ -38,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="ChessGameManager.h" />
     <ClInclude Include="ChessPiece.h" />
     <ClInclude Include="GameCell.h" />

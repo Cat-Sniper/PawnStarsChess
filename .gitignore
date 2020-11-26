@@ -34,10 +34,12 @@
 *.out
 *.app
 Chess Game/.vs/Chess Game/v16/.suo
+/Chess Game/.vs/Chess Game/v16/Browse.VC.opendb
 *.db
 *.idb
 *.tlog
 Chess Game/.vs/Chess Game/v16/Browse.VC.db
-Chess Game/Debug
+
 Chess Game/x64/Debug/
+
 
