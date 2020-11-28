@@ -1,8 +1,9 @@
 #pragma once
 #include "ChessPiece.h"
-class Knight :
-    public ChessPiece {
+class Knight : public ChessPiece {
+
 public:
-    std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
+	Knight(int playerID) : ChessPiece(playerID) {}
+	std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
 };
 

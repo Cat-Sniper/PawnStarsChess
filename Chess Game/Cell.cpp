@@ -7,7 +7,7 @@
 Cell::Cell() //default constructor
 {
 	isOccupied = false;
-	currentChessPiece; //all cells start without any chess pieces, but a chess piece can be added with a method
+	currentChessPiece = nullptr; //all cells start without any chess pieces, but a chess piece can be added with a method
 }
 
 Cell::~Cell() //default destructor

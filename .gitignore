@@ -35,6 +35,7 @@
 *.app
 Chess Game/.vs/Chess Game/v16/.suo
 *.db
+*.suo
 *.idb
 *.tlog
 Chess Game/.vs/Chess Game/v16/Browse.VC.db

@@ -1,2 +1,0 @@
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Debug\Chess Game.exe
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Debug\Chess Game.pdb

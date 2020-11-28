@@ -1,7 +1,10 @@
 #pragma once
 #include "ChessPiece.h"
-class Pawn :
-    public ChessPiece {
+class Pawn : public ChessPiece {
+public:
+
+	Pawn(int playerID) : ChessPiece(playerID) {}
+
     /// <summary>
     /// missing the move option when the pawn can capture enemy pieces (it does so by going diagonally forward 1 cell)
     /// so the board must add that option when possible.

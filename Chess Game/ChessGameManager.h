@@ -1,12 +1,19 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
+#include <vector>
+
 class GameState;
+class Player;
+class Board;
 
 class ChessGameManager {
 
 private:
-	GameState *m_currentGameState;
+	GameState* _currentGameState;
+	std::vector<Player*> _players;
+	Player* _currentPlayer;
+	Board* _gameBoard;
 public:
 
 	ChessGameManager();
@@ -31,5 +38,10 @@ public:
 	/// Cleanup for when we close the program
 	/// </summary>
 	void Shutdown();
+
+	/// <summary>
+	/// Returns the current active player (whoever's turn it is)
+	/// </summary>
+	Player* getCurrentPlayer() { return _currentPlayer; }
 };
 #endif

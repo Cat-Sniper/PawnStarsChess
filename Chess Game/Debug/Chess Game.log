@@ -1,5 +1,0 @@
-﻿  Board.cpp
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(146,2): warning C4060: switch statement contains no 'case' or 'default' labels
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(147): warning C4715: 'ChessBoard::CreateBTRow': not all control paths return a value
-C:\Users\Ashraf\source\repos\Cat-Sniper\PawnStarsChess\Chess Game\Board.cpp(118): warning C4715: 'ChessBoard::CreateChessPiece': not all control paths return a value
-  Chess Game.vcxproj -> C:\Users\Ashraf\Source\Repos\Cat-Sniper\PawnStarsChess\Chess Game\Debug\Chess Game.exe

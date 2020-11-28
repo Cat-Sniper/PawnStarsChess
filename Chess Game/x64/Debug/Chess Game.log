@@ -10,15 +10,10 @@ F:\Repos\PawnStars\PawnStarsChess\Chess Game\Board.cpp(130,2): warning C4060: sw
   main.cpp
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(374,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(415,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Mesh.cpp
-F:\Repos\PawnStars\PawnStarsChess\Chess Game\Mesh.cpp(13,68): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  Model.cpp
   Pawn.cpp
+  Player.cpp
   Queen.cpp
   Rook.cpp
-  Shader.cpp
-  stb.cpp
-  Texture.cpp
   Generating Code...
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\Board.cpp(131): warning C4715: 'ChessBoard::CreateBTRow': not all control paths return a value
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\Board.cpp(104): warning C4715: 'ChessBoard::CreateChessPiece': not all control paths return a value
