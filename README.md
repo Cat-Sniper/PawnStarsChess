@@ -1,9 +1,3 @@
 # PawnStarsChess
  
-This is a game of Chess.
-
-Mike's TODO:
-
-- Add InputManager (Dependent on OpenGL wrapper/implementation)
-- Merge Travis' Rendering stuff and tie it to core engine.
-- merge everybody's code.
+This is a game of Chess. It has cutting edge 3D graphics (seriously watch your fingers on those corners!) and really don't try to move any pieces just yet.
