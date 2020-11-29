@@ -10,6 +10,7 @@
 #include "GlobalTypes.h"
 #include <vector>
 
+
 class ChessPiece {
 public:
      /// <summary>
@@ -104,7 +105,6 @@ public:
     virtual std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
 
 protected:
-    // ChessBoard* chessboard;  <- should not be a dependency; i'm not sure we need this
     int _playerID;
     Color _materialColor;
     int _isAttacked;               // 1 if piece is under attack by an opposite piece, 0 otherwise.
@@ -112,6 +112,7 @@ protected:
     bool _isAlive;                 // whether or not the piece is still on the board. Used to see if A - the player can interact and B - should we draw this?
     bool _selected;                // Active player is currently trying to move this player or not.
     Position _currentPosition;    // (x,y) coordinate on the chess board (default is top left at 0,0)
+
 };   
 
 #endif  // CHESSPIECE_H

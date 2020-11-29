@@ -1,2 +1,11 @@
-﻿  GameplayState.cpp
+﻿  ChessBoard.cpp
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\GlobalTypes.h(28,49): warning C4305: 'argument': truncation from 'double' to 'float'
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\ChessBoard.cpp(148,2): warning C4060: switch statement contains no 'case' or 'default' labels
+  ChessGameManager.cpp
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\GlobalTypes.h(28,49): warning C4305: 'argument': truncation from 'double' to 'float'
+  Rook.cpp
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\GlobalTypes.h(28,49): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\ChessBoard.cpp(149): warning C4715: 'ChessBoard::createBTRow': not all control paths return a value
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\ChessBoard.cpp(122): warning C4715: 'ChessBoard::createChessPiece': not all control paths return a value
   Chess Game.vcxproj -> F:\Repos\PawnStars\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe

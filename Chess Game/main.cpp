@@ -17,6 +17,7 @@
 #include <math.h>
 
 #include "ChessGameManager.h"
+#include "GlobalTypes.h"
 
 // Internal globals for timing
 double gPCFrequency = 0.0;
@@ -224,8 +225,6 @@ int main() {
 	Shader pieceShader = Shader("vertex.vert", "fragment.frag");
 
 	//Models
-	glm::vec3 redColor = glm::vec3(1.0, 0.5, 0.31);
-	glm::vec3 blueColor = glm::vec3(92/255.0f, 225/255.0f, 230/255.0f);
 
 	std::vector<std::string> modelFiles = {"King.obj", "Queen.obj", "Bishop.obj", "knight.obj", "Rook.obj", "Pawn.obj"};//this will be the order used for the co-related vectors
 	std::vector<Model> pieceModels;
@@ -378,7 +377,7 @@ int main() {
 				int subIndex = (j < cross) ? 0 : 1;//subIndex ties to rs/normal matrices and color
 				//generate model matrix
 				glm::mat4 model = glm::translate(identity, modelPositions[i][j]);
-				glm::vec3 color = (subIndex) ? blueColor : redColor;
+				glm::vec3 color = (subIndex) ? glm::vec3(PLAYER2_COLOR.r, PLAYER2_COLOR.g, PLAYER2_COLOR.b) : glm::vec3(PLAYER1_COLOR.r, PLAYER1_COLOR.g, PLAYER1_COLOR.b);
 				model = model * modelRSMats[i][subIndex];
 
 				//set uniforms

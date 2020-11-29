@@ -58,17 +58,21 @@ void ChessBoard::boardInit()
 					//CASE 0 AND 1 ARE FOR PLAYER 0 (WHITE)
 				case 0: //fill bottom row, passing the column as the argument
 					_board[i][j].addChessPiece(createBTRow(j , 0));
+					_board[i][j].getCurrentChessPiece()->setPosition(Position(i,j));
 					break;
 				case 1:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 0));
+					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
 					break;
 
 					//CASE 6 AND 7 ARE FOR PLAYER 1 (BLACK)
 				case 6:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 1));
+					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
 					break;
 				case 7:
 					_board[i][j].addChessPiece(createBTRow(j, 1));
+					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
 					break;
 				default: //SHOULD I KEEP THIS?
 					_board[i][j].removeChessPiece();
