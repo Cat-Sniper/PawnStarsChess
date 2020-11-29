@@ -5,7 +5,8 @@
 
 class GameState;
 class Player;
-class Board;
+class ChessBoard;
+class ChessPiece;
 
 class ChessGameManager {
 
@@ -13,7 +14,9 @@ private:
 	GameState* _currentGameState;
 	std::vector<Player*> _players;
 	Player* _currentPlayer;
-	Board* _gameBoard;
+	ChessBoard* _gameBoard;
+	ChessPiece* _selectedPiece;
+
 public:
 
 	ChessGameManager();
@@ -43,5 +46,6 @@ public:
 	/// Returns the current active player (whoever's turn it is)
 	/// </summary>
 	Player* getCurrentPlayer() { return _currentPlayer; }
+	ChessBoard* getBoard() { return _gameBoard; }
 };
 #endif

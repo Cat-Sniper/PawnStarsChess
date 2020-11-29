@@ -1,19 +1,26 @@
+/// Edited: Michael Ward - November 28, 2020
+
 #pragma once
 #include "GlobalTypes.h"
-#include "ChessPiece.h"
+
+class ChessPiece;
 
 class Cell
 {
-public:
-	Color color;
-	bool isOccupied;
-	ChessPiece *currentChessPiece;
+private:
+	Color _color;
+	ChessPiece* _currentChessPiece;
+	bool _isOccupied;
 
 public:
 	Cell();
 	~Cell();
-	void SetWhite();
-	void SetBlack();
-	void AddChessPiece(ChessPiece *piece);
-	void RemoveChessPiece();
+	void setWhite();
+	void setBlack();
+	void addChessPiece(ChessPiece *piece);
+	void removeChessPiece();
+	void deleteChessPiece();
+	bool isOccupied() { return _isOccupied; }
+	ChessPiece* getCurrentChessPiece() { return _currentChessPiece; }
+
 };

@@ -16,6 +16,7 @@ struct Color
 struct Position {
 	int x;
 	int	y;
+	Position() : x(0), y(0) {}
 	Position(int x, int y) : x(0), y(0) {
 		this->x = x;
 		this->y = y;

@@ -4,6 +4,6 @@
     "\\Chess Game",
     "\\Chess Game\\GameStates"
   ],
-  "SelectedNode": "\\Chess Game\\Rook.h",
+  "SelectedNode": "\\Chess Game\\GameStates\\GameplayState.h",
   "PreviewInSolutionExplorer": false
 }
