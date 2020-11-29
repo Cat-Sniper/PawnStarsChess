@@ -1,13 +1,13 @@
 #include "Rook.h"
 
-std::vector<Position> Rook::highlightMoves(Position current, int boardWidth, int boardLength) {
-    std::vector<Position> ret;
+std::vector<glm::ivec2> Rook::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
+    std::vector<glm::ivec2> ret;
     for (int i = 0; i < boardLength; ++i) {
-        Position file{ current.x, i };
+         glm::ivec2 file{ current.x, i };
         if (i != current.y) ret.push_back(file);
     }
     for (int i = 0; i < boardWidth; ++i) {
-        Position rank{ i, current.y };
+         glm::ivec2 rank{ i, current.y };
         if (i != current.x) ret.push_back(rank);
     }
     return ret;

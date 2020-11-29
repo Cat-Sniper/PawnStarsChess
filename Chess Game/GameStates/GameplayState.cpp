@@ -26,7 +26,7 @@ void GameplayState::HandleInput(ChessGameManager& gameManager) {
 			clickedPiece->setSelection(true);
 
 			// Get all the possible cells that this piece may move to
-			std::vector<Position> moves = gameManager.getBoard()->highlightMoves(clickedPiece, clickedPiece->getPosition());
+			std::vector<glm::ivec2> moves = gameManager.getBoard()->highlightMoves(clickedPiece, clickedPiece->getPosition());
 		}
 	}
 }

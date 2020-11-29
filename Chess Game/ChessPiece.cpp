@@ -37,7 +37,7 @@ int ChessPiece::setPlayerID(int newid) {
     }
 }
 
-std::vector<Position> ChessPiece::highlightMoves(Position current, int boardWidth, int boardLength) {
-    std::vector<Position> ret;
+std::vector<glm::ivec2> ChessPiece::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
+    std::vector<glm::ivec2> ret;
     return ret;
 }

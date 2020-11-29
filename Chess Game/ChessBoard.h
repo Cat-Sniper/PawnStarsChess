@@ -23,6 +23,6 @@ public:
 	~ChessBoard();
 	void boardInit();
 
-	ChessPiece* getPieceAtLocation(Position pos) { return _board[pos.x][pos.y].getCurrentChessPiece(); }
-	std::vector<Position> highlightMoves(ChessPiece *piece, Position current, int boardWidth = 8, int boardLength = 8);
+	ChessPiece* getPieceAtLocation(glm::ivec2 pos) { return _board[pos.x][pos.y].getCurrentChessPiece(); }
+	std::vector<glm::ivec2> highlightMoves(ChessPiece *piece, glm::ivec2 current, int boardWidth = 8, int boardLength = 8);
 };

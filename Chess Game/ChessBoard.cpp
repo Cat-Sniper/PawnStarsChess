@@ -58,21 +58,21 @@ void ChessBoard::boardInit()
 					//CASE 0 AND 1 ARE FOR PLAYER 0 (WHITE)
 				case 0: //fill bottom row, passing the column as the argument
 					_board[i][j].addChessPiece(createBTRow(j , 0));
-					_board[i][j].getCurrentChessPiece()->setPosition(Position(i,j));
+					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i,j));
 					break;
 				case 1:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 0));
-					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
+					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
 					break;
 
 					//CASE 6 AND 7 ARE FOR PLAYER 1 (BLACK)
 				case 6:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 1));
-					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
+					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
 					break;
 				case 7:
 					_board[i][j].addChessPiece(createBTRow(j, 1));
-					_board[i][j].getCurrentChessPiece()->setPosition(Position(i, j));
+					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
 					break;
 				default: //SHOULD I KEEP THIS?
 					_board[i][j].removeChessPiece();
@@ -148,13 +148,13 @@ ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on
 	}
 }
 
-std::vector<Position> ChessBoard::highlightMoves(ChessPiece *piece, Position current, int boardWidth, int boardLength)
+std::vector<glm::ivec2> ChessBoard::highlightMoves(ChessPiece *piece, glm::ivec2 current, int boardWidth, int boardLength)
 {
-	std::vector<Position> moveList = piece->highlightMoves(current, boardWidth, boardLength);
+	std::vector<glm::ivec2> moveList = piece->highlightMoves(current, boardWidth, boardLength);
 
 	for (int i = 0; i < moveList.size(); i++)
 	{
-		Position pos = moveList[i]; // if it's occupied by the same player
+		glm::ivec2 pos = moveList[i]; // if it's occupied by the same player
 		if (_board[pos.x][pos.y].isOccupied() && _board[pos.x][pos.y].getCurrentChessPiece()->getPlayerID() == piece->getPlayerID())
 		{
 			moveList.erase(moveList.begin()); //remove the position from the list of positions

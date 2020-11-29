@@ -13,6 +13,6 @@ public:
     /// <param name="boardWidth"></param>
     /// <param name="boardLength"></param>
     /// <returns></returns>
-    std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
+    std::vector<glm::ivec2> highlightMoves(glm::ivec2 current, int boardWidth = 8, int boardLength = 8);
 };
 

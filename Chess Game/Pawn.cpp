@@ -1,8 +1,8 @@
 #include "Pawn.h"
 
-std::vector<Position> Pawn::highlightMoves(Position current, int boardWidth, int boardLength) {
-    std::vector<Position> ret;
-    Position next = current;
+std::vector<glm::ivec2> Pawn::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
+    std::vector<glm::ivec2> ret;
+    glm::ivec2 next = current;
     if (getPlayerID() == 0) {  // black pieces
         next.y++;
         if (next.y < boardLength) ret.push_back(next);

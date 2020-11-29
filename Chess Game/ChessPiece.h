@@ -76,7 +76,7 @@ public:
           return _hasMoved;
      }
 
-     inline int isOutOfBounds(Position pos, int x, int y) {
+     inline int isOutOfBounds(glm::ivec2 pos, int x, int y) {
           return !((pos.x >= 0) && (pos.y >= 0) && (pos.x < x) && (pos.y < y));
      }
 
@@ -84,8 +84,8 @@ public:
      inline bool isSelected() { return _selected; }
      inline void setSelection(bool select) { _selected = select; }
 
-     inline void setPosition(Position pos) { _currentPosition = pos; }
-     inline Position getPosition() { return _currentPosition; }
+     inline void setPosition(glm::ivec2 pos) { _currentPosition = pos; }
+     inline glm::ivec2 getPosition() { return _currentPosition; }
 
      inline bool isAlive() { return _isAlive; }
      inline void setAlive(bool alive) { _isAlive = alive; }
@@ -102,7 +102,7 @@ public:
     /// <param name="boardWidth"> the width of the board, defaults to 8. </param>
     /// <param name="boardLength"> the lengtht of the board, defaults to 8. </param>
     /// <returns> without overriding, this returns an empty vector. </returns>
-    virtual std::vector<Position> highlightMoves(Position current, int boardWidth = 8, int boardLength = 8);
+    virtual std::vector<glm::ivec2> highlightMoves(glm::ivec2 current, int boardWidth = 8, int boardLength = 8);
 
 protected:
     int _playerID;
@@ -111,7 +111,7 @@ protected:
     int _hasMoved;
     bool _isAlive;                 // whether or not the piece is still on the board. Used to see if A - the player can interact and B - should we draw this?
     bool _selected;                // Active player is currently trying to move this player or not.
-    Position _currentPosition;    // (x,y) coordinate on the chess board (default is top left at 0,0)
+    glm::ivec2 _currentPosition;    // (x,y) coordinate on the chess board (default is top left at 0,0)
 
 };   
 
