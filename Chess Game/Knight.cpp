@@ -1,20 +1,15 @@
 #include "Knight.h"
 
-std::vector<glm::ivec2> Knight::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
-    std::vector<glm::ivec2> ret;
+Knight::Knight(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, pieceModel, targetShader) {}
+std::vector<glm::ivec2> Knight::getMoves(int xLimit, int yLimit) {
+	std::vector<glm::ivec2> moves;
+	std::vector<glm::ivec2> testVecs = { glm::ivec2(2, 1), glm::ivec2(1,2), glm::ivec2(2, -1), glm::ivec2(1, -2), glm::ivec2(-1, -2), glm::ivec2(-2, -1), glm::ivec2(-2, 1), glm::ivec2(-1, 2) };
+	glm::ivec2 test;
 
-    ret.push_back(glm::ivec2{ current.x - 2, current.y - 1 });
-    ret.push_back(glm::ivec2{ current.x - 1, current.y - 2 });
-    ret.push_back(glm::ivec2{ current.x + 2, current.y - 1 });
-    ret.push_back(glm::ivec2{ current.x + 1, current.y - 2 });
-    ret.push_back(glm::ivec2{ current.x + 2, current.y + 1 });
-    ret.push_back(glm::ivec2{ current.x + 1, current.y + 2 });
-    ret.push_back(glm::ivec2{ current.x - 2, current.y + 1 });
-    ret.push_back(glm::ivec2{ current.x - 1, current.y + 2 });
+	for (int i = 0; i < testVecs.size(); i++) {
+		test = position + testVecs[i];
+		if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) moves.push_back(glm::ivec2(test));
+	}
 
-    for (std::vector<glm::ivec2>::iterator it = ret.begin(); it != ret.end(); it++) {
-        if (isOutOfBounds(*it, boardWidth, boardLength)) ret.erase(it);
-    }
-
-    return ret;
+	return moves;
 }

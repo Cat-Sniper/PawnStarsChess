@@ -21,7 +21,14 @@
 #include "ChessGameManager.h"
 #include "Player.h"
 #include "ChessPiece.h"
+#include "King.h"
+#include "Queen.h"
+#include "Bishop.h"
+#include "Knight.h"
+#include "Pawn.h"
+#include "Rook.h"
 #include "GlobalTypes.h"
+#include "Camera.h"
 
 // Internal globals for timing
 double gPCFrequency = 0.0;
@@ -226,7 +233,15 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+glm::vec3 cameraPos = glm::vec3(3.5f, -3.5f, 7.0f);
+glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
+glm::vec3 cameraTarget = glm::vec3(3.5f, 3.5f, 0.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
 
+
+Camera gameCamera = Camera(cameraPos, cameraTarget, cameraUp, shift);
 
 int main() {
 	
@@ -366,100 +381,96 @@ int main() {
 	}
 
 	glm::mat4 rsModel;
+	glm::vec3 redColor = glm::vec3(PLAYER1_COLOR.r, PLAYER1_COLOR.g, PLAYER1_COLOR.b);
+	glm::vec3 blueColor = glm::vec3(PLAYER2_COLOR.r, PLAYER2_COLOR.g, PLAYER2_COLOR.b);
+	std::vector<ChessPiece> redPieces;
+	std::vector<ChessPiece> bluePieces;
+	
 
 	//kings
-	modelPositions[0].push_back(glm::vec3(4.0f, 0.0f, 0.5f));
-	modelPositions[0].push_back(glm::vec3(4.0f, 7.0f, 0.5f));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-	modelRSMats[0].push_back(rsModel);
-	modelRSMats[0].push_back(rsModel);
+	glm::ivec2 pos = glm::ivec2(4, 0);
+	ChessPiece piece = King(0, pos, redColor, rsModel, pieceModels[0], pieceShader);
+	redPieces.push_back(piece);
 
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[0].push_back(rsModel);
-	modelNMats[0].push_back(rsModel);
+	pos = glm::ivec2(4, 7);
+	piece = King(1, pos, blueColor, rsModel, pieceModels[0], pieceShader);
+	bluePieces.push_back(piece);
 
 	//queens
-	modelPositions[1].push_back(glm::vec3(3.0f, 0.0f, 0.5f));
-	modelPositions[1].push_back(glm::vec3(3.0f, 7.0f, 0.5f));
 
-	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-	modelRSMats[1].push_back(rsModel);
-	modelRSMats[1].push_back(rsModel);
+	pos = glm::ivec2(3, 0);
+	redPieces.push_back(Queen(0, pos, redColor, rsModel, pieceModels[1], pieceShader));
 
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[1].push_back(rsModel);
-	modelNMats[1].push_back(rsModel);
+	pos = glm::ivec2(3, 7);
+	bluePieces.push_back(Queen(1, pos, blueColor, rsModel, pieceModels[1], pieceShader));
 
 	//bishops
-	modelPositions[2].push_back(glm::vec3(2.0f, 0.0f, 0.5f));
-	modelPositions[2].push_back(glm::vec3(5.0f, 0.0f, 0.5f));
-	modelPositions[2].push_back(glm::vec3(2.0f, 7.0f, 0.5f));
-	modelPositions[2].push_back(glm::vec3(5.0f, 7.0f, 0.5f));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.3f, 0.3f, 0.3f));
-	modelRSMats[2].push_back(rsModel);
-	modelRSMats[2].push_back(rsModel);
 
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[2].push_back(rsModel);
-	modelNMats[2].push_back(rsModel);
+	pos = glm::ivec2(2, 0);
+	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceModels[2], pieceShader));
+	pos = glm::ivec2(5, 0);
+	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceModels[2], pieceShader));
+	
+	pos = glm::ivec2(2, 7);
+	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceModels[2], pieceShader));
+	pos = glm::ivec2(5, 7);
+	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceModels[2], pieceShader));
 
 	//knights
-	modelPositions[3].push_back(glm::vec3(1.0f, 0.0f, 0.5f));
-	modelPositions[3].push_back(glm::vec3(6.0f, 0.0f, 0.5f));
-	modelPositions[3].push_back(glm::vec3(1.0f, 7.0f, 0.5f));
-	modelPositions[3].push_back(glm::vec3(6.0f, 7.0f, 0.5f));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::rotate(rsModel, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-	modelRSMats[3].push_back(rsModel);
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[3].push_back(rsModel);
+
+	pos = glm::ivec2(1, 0);
+	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceModels[3], pieceShader));
+	pos = glm::ivec2(6, 0);
+	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceModels[3], pieceShader));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::rotate(rsModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-	modelRSMats[3].push_back(rsModel);
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[3].push_back(rsModel);
+	
+	pos = glm::ivec2(1, 7);
+	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceModels[3], pieceShader));
+	pos = glm::ivec2(6, 7);
+	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceModels[3], pieceShader));
 
 	//rooks
-	modelPositions[4].push_back(glm::vec3(0.0f, 0.0f, 0.5f));
-	modelPositions[4].push_back(glm::vec3(7.0f, 0.0f, 0.5f));
-	modelPositions[4].push_back(glm::vec3(0.0f, 7.0f, 0.5f));
-	modelPositions[4].push_back(glm::vec3(7.0f, 7.0f, 0.5f));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-	modelRSMats[4].push_back(rsModel);
-	modelRSMats[4].push_back(rsModel);
+	
+	pos = glm::ivec2(0, 0);
+	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceModels[4], pieceShader));
+	pos = glm::ivec2(7, 0);
+	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceModels[4], pieceShader));
 
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[4].push_back(rsModel);
-	modelNMats[4].push_back(rsModel);
+	pos = glm::ivec2(0, 7);
+	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceModels[4], pieceShader));
+	pos = glm::ivec2(7, 7);
+	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceModels[4], pieceShader));
 
 	//pawns
-	for (int i = 0; i < 8; i++) {
-		modelPositions[5].push_back(glm::vec3(0.0f + i, 1.0f, 0.5f));
-	}
-
-	for (int i = 0; i < 8; i++) {
-		modelPositions[5].push_back(glm::vec3(0.0f + i, 6.0f, 0.5f));
-	}
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.2f, 0.2f, 0.2f));
-	modelRSMats[5].push_back(rsModel);
-	modelRSMats[5].push_back(rsModel);
+	
+	for (int i = 0; i < 8; i++) {
+		pos = glm::ivec2(i, 1);
+		redPieces.push_back(Pawn(0, pos, redColor, rsModel, pieceModels[5], pieceShader));
+	}
 
-	rsModel = glm::transpose(glm::inverse(rsModel));
-	modelNMats[5].push_back(rsModel);
-	modelNMats[5].push_back(rsModel);
+	for (int i = 0; i < 8; i++) {
+		pos = glm::ivec2(i, 6);
+		bluePieces.push_back(Pawn(1, pos, blueColor, rsModel, pieceModels[5], pieceShader));
+	}
 
 #pragma region _windowLoop
 	int base = 0;
@@ -468,7 +479,8 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(window);
 		gameManager->Update(deltaTime);
-		view = glm::lookAt(cameraPos, glm::vec3(3.5f, 3.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		//view = glm::lookAt(cameraPos, glm::vec3(3.5f, 3.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		view = gameCamera.getViewMat();
 
 
 		//render calls
@@ -495,30 +507,12 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(cubeIndicies) / sizeof(unsigned int), GL_UNSIGNED_INT, 0);
 
 		//draw pieces
-		pieceShader.bind();
+		for (ChessPiece p : redPieces) {
+			p.draw(view, projection, lightPos, cameraPos);
+		}
 
-		for (int i = 0; i < 6; i++) {//i ties to the model
-			//know when to cross from white pieces to black
-			int cross = modelPositions[i].size() / 2;
-
-			//for each position, render the model
-			for (int j = 0; j < modelPositions[i].size(); j++) {//j ties to the instance
-				int subIndex = (j < cross) ? 0 : 1;//subIndex ties to rs/normal matrices and color
-				//generate model matrix
-				glm::mat4 model = glm::translate(identity, modelPositions[i][j]);
-				glm::vec3 color = (subIndex) ? glm::vec3(PLAYER2_COLOR.r, PLAYER2_COLOR.g, PLAYER2_COLOR.b) : glm::vec3(PLAYER1_COLOR.r, PLAYER1_COLOR.g, PLAYER1_COLOR.b);
-				model = model * modelRSMats[i][subIndex];
-
-				//set uniforms
-				pieceShader.setMat4Uniform("model", glm::value_ptr(model));
-				pieceShader.setMat4Uniform("view", glm::value_ptr(view));
-				pieceShader.setMat4Uniform("projection", glm::value_ptr(projection));
-				pieceShader.setMat4Uniform("nMat", glm::value_ptr(modelNMats[i][subIndex]));
-				pieceShader.setVec3Uniform("lightPos", glm::value_ptr(lightPos));
-				pieceShader.setVec3Uniform("viewPos", glm::value_ptr(cameraPos));
-				pieceShader.setVec3Uniform("objectColor", glm::value_ptr(color));
-				pieceModels[i].Draw(pieceShader);
-			}
+		for (ChessPiece p : bluePieces) {
+			p.draw(view, projection, lightPos, cameraPos);
 		}
 
 		//Final display calls
@@ -550,6 +544,7 @@ void processInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {//zoom out
+		/*
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::mat4 translation = glm::translate(identity, glm::vec3(-3.5f, -3.5f, 0.0f));
 		cameraH = translation * cameraH;
@@ -560,8 +555,11 @@ void processInput(GLFWwindow* window) {
 		cameraPos.x = cameraH.x;
 		cameraPos.y = cameraH.y;
 		cameraPos.z = cameraH.z;
+		*/
+		gameCamera.out(deltaTime);
 	}
 	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+		/*
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::mat4 translation = glm::translate(identity, glm::vec3(-3.5f, -3.5f, 0.0f));
 		cameraH = translation * cameraH;
@@ -572,9 +570,12 @@ void processInput(GLFWwindow* window) {
 		cameraPos.x = cameraH.x;
 		cameraPos.y = cameraH.y;
 		cameraPos.z = cameraH.z;
+		*/
+		gameCamera.in(deltaTime);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {//camera moves up
+		/*
 		//conversion to homogeneous
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::vec4 cameraHR = glm::vec4(cameraRight.x, cameraRight.y, cameraRight.z, 1.0f);
@@ -600,8 +601,11 @@ void processInput(GLFWwindow* window) {
 		cameraRight.x = cameraHR.x;
 		cameraRight.y = cameraHR.y;
 		cameraRight.z = cameraHR.z;
+		*/
+		gameCamera.right(deltaTime);
 	}
 	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+		/*
 		//conversion to homogeneous
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::vec4 cameraHR = glm::vec4(cameraRight.x, cameraRight.y, cameraRight.z, 1.0f);
@@ -627,9 +631,12 @@ void processInput(GLFWwindow* window) {
 		cameraRight.x = cameraHR.x;
 		cameraRight.y = cameraHR.y;
 		cameraRight.z = cameraHR.z;
+		*/
+		gameCamera.left(deltaTime);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		/*
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::mat4 translation = glm::translate(identity, glm::vec3(-3.5f, -3.5f, 0.0f));
 		cameraH = translation * cameraH;
@@ -640,8 +647,11 @@ void processInput(GLFWwindow* window) {
 		cameraPos.x = cameraH.x;
 		cameraPos.y = cameraH.y;
 		cameraPos.z = cameraH.z;
+		*/
+		gameCamera.down(deltaTime);
 	}
 	else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		/*
 		glm::vec4 cameraH = glm::vec4(cameraPos.x, cameraPos.y, cameraPos.z, 1.0f);
 		glm::mat4 translation = glm::translate(identity, glm::vec3(-3.5f, -3.5f, 0.0f));
 		cameraH = translation * cameraH;
@@ -652,6 +662,8 @@ void processInput(GLFWwindow* window) {
 		cameraPos.x = cameraH.x;
 		cameraPos.y = cameraH.y;
 		cameraPos.z = cameraH.z;
+		*/
+		gameCamera.up(deltaTime);
 	}
 }
 
