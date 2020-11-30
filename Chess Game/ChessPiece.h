@@ -31,7 +31,7 @@ protected:
 	Model _pieceModel;
 
 public:
-	ChessPiece(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader);
+	ChessPiece(int playerID, glm::mat4& rsMat, Shader& targetShader);
 
 	int getPlayerID();
 	void setPlayerID(int newPlayerID);

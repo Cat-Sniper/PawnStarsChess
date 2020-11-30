@@ -1,9 +1,8 @@
 #include "ChessPiece.h"
 
-ChessPiece::ChessPiece(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) {
+ChessPiece::ChessPiece(int playerID, glm::mat4& rsMat, Shader& targetShader) {
 	_playerID = playerID;
-	_position = position;
-	_color = color;
+	_position = glm::ivec2(0, 0);
 	_rsMat = rsMat;
 	_targetShader = &targetShader;
 	_nMat = glm::transpose(glm::inverse(rsMat));
@@ -12,6 +11,8 @@ ChessPiece::ChessPiece(int playerID, glm::ivec2& position, glm::vec3& color, glm
 	_hasMoved = false;
 	_selected = false;
 
+	if (playerID == 0) _color = glm::vec3(PLAYER1_COLOR.r, PLAYER1_COLOR.g, PLAYER1_COLOR.b);
+	else _color = glm::vec3(PLAYER2_COLOR.r, PLAYER2_COLOR.g, PLAYER2_COLOR.b);
 }
 
 int ChessPiece::getPlayerID() { return  _playerID; }

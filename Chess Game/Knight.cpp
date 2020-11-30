@@ -1,6 +1,6 @@
 #include "Knight.h"
 
-Knight::Knight(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, targetShader) {
+Knight::Knight(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
 
 	_pieceModel = Model(&(RELATIVE_PATH + "knight.obj")[0]);
 }

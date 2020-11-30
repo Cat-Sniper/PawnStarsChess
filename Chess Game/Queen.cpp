@@ -1,6 +1,6 @@
 #include "Queen.h"
 
-Queen::Queen(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, targetShader) {
+Queen::Queen(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
 	
 	_pieceModel = Model(&(RELATIVE_PATH + "Queen.obj")[0]);
 }

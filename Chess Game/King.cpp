@@ -1,7 +1,6 @@
 #include "King.h"
-#include "Model.h"
 
-King::King(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, targetShader) {
+King::King(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
 
 	_pieceModel = Model(&(RELATIVE_PATH + "King.obj")[0]);
 }

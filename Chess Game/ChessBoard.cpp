@@ -2,21 +2,22 @@
 /// -----------------------------------------
 /// 8x8 grid composed of 'Cells' who know which ChessPiece is sitting on them.
 /// Created Ashraf 
-#include <string>
 #include "ChessBoard.h"
-#include "ChessGameManager.h"
-#include "Player.h"
 
 // Reference headers
+#include "GlobalTypes.h"
+#include "ChessGameManager.h"
+#include "Player.h"
+#include "King.h"
+#include "Queen.h"
 #include "Bishop.h"
 #include "ChessPiece.h"
-#include "King.h"
 #include "Knight.h"
-#include "Pawn.h"
-#include "Queen.h"
 #include "Rook.h"
+#include "Pawn.h"
 
-ChessBoard::ChessBoard(ChessGameManager* game)
+#include <string>
+ChessBoard::ChessBoard(ChessGameManager* game) : _pieceShader("vertex.vert", "fragment.frag")
 {
 	_gameManager = game;
 	boardInit();
@@ -99,31 +100,47 @@ bool ChessBoard::isEven(int i, int j)
 
 ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 {
-
+	
 	if (pieceType == "bishop")
 	{
-		//return new Bishop(playerID);
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.3f, 0.3f, 0.3f));
+		return new Bishop(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "king")
 	{
-		//return new King(playerID);
+		return new King(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "knight")
 	{
-		//return new Knight(playerID);
+		if (playerID == 0) {
+			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+			rsModel = glm::rotate(rsModel, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+			rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+		}
+		else {
+			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+			rsModel = glm::rotate(rsModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+			rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+		}
+
+		return new Knight(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "pawn")
 	{
-		//return new Pawn(playerID);
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.2f, 0.2f, 0.2f));
+		return new Pawn(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "queen")
 	{
-		//return new Queen(playerID);
+		return new Queen(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "rook")
 	{
-
-		//return new Rook(playerID);
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+		return new Rook(playerID, rsModel, _pieceShader);
 	}
 
 	return nullptr;
@@ -136,7 +153,7 @@ ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on
 	case 0:
 	case 7:
 		return createChessPiece("rook", playerID);
-	break;
+		break;
 
 	case 1:
 	case 6:

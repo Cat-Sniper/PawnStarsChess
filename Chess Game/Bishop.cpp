@@ -1,7 +1,6 @@
 #include "Bishop.h"
-#include "Model.h"
 
-Bishop::Bishop(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, targetShader) {
+Bishop::Bishop(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
 	_pieceModel = Model(&(RELATIVE_PATH + "Bishop.obj")[0]);
 }
 std::vector<glm::ivec2> Bishop::getMoves(int xLimit, int yLimit) {

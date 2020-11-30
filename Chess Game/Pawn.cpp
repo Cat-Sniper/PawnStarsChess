@@ -1,6 +1,6 @@
 #include "Pawn.h"
 
-Pawn::Pawn(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, targetShader), initMove(true) {
+Pawn::Pawn(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader), initMove(true) {
 
 	_pieceModel = Model(&(RELATIVE_PATH + "Pawn.obj")[0]);
 }

@@ -31,7 +31,7 @@ void ChessGameManager::Init()
 
 	//TESTING STUFF - DELETE LATER
 	_currentPlayer = _players.at(0);
-	//_gameBoard = new ChessBoard(this);
+	_gameBoard = new ChessBoard(this);
 }
 
 void ChessGameManager::Update(float deltaTime)
@@ -42,7 +42,7 @@ void ChessGameManager::Update(float deltaTime)
 	_currentPlayer->takeTurn();
 }
 
-void ChessGameManager::Render()
+void ChessGameManager::Render(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos)
 {
 	//_gameBoard->Render();
 
@@ -50,7 +50,7 @@ void ChessGameManager::Render()
 
 		for (auto& chessPiece : player->getPieces()) {
 			if (chessPiece->getAlive()) {
-				// chessPiece->Render();
+				 chessPiece->draw(view, projection, lightPos, viewPos);
 			}
 		}
 	}

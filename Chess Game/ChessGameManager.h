@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// This is where all the draw calls will be
 	/// </summary>
-	void Render();
+	void Render(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos);
 
 	/// <summary>
 	/// Cleanup for when we close the program

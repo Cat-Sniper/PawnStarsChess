@@ -4,6 +4,8 @@
 #include "glm/glm.hpp"
 #include <string>
 
+#include "Shader.h"
+
 // GLOBAL STRUCTS
 struct Color
 {
@@ -29,6 +31,12 @@ struct Character {
 const Color PLAYER1_COLOR = Color(255 / 255.0f, 254 / 255.0f, 238 / 255.0f);
 const Color PLAYER2_COLOR = Color(0.5, 0.5, 0.5);
 const std::string RELATIVE_PATH = "../Chess Game/Dependencies/";
+
+
+
+constexpr float shift = glm::radians(40.0f);
+constexpr float clamp_max = glm::radians(90.0f);
+constexpr glm::mat4 identity = glm::mat4(1.0f);
 
 #define CHESS_WINDOW_WIDTH 1000
 #define CHESS_WINDOW_HEIGHT 1000
