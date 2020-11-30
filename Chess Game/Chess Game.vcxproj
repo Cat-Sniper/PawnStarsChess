@@ -20,12 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bishop.cpp" />
-    <ClCompile Include="ChessBoard.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cell.cpp" />
-    <ClCompile Include="ChessGameManager.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
-    <ClCompile Include="GameCell.cpp" />
-    <ClCompile Include="GameStates\GameplayState.cpp" />
     <ClCompile Include="King.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
@@ -41,13 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
-    <ClInclude Include="ChessBoard.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Cell.h" />
-    <ClInclude Include="ChessGameManager.h" />
     <ClInclude Include="ChessPiece.h" />
-    <ClInclude Include="GameCell.h" />
-    <ClInclude Include="GameStates\GameplayState.h" />
-    <ClInclude Include="GameStates\GameState.h" />
     <ClInclude Include="GlobalTypes.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />

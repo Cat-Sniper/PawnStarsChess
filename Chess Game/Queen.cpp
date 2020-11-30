@@ -1,41 +1,23 @@
 #include "Queen.h"
 
-std::vector<glm::ivec2> Queen::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
-    std::vector<glm::ivec2> ret;
-    
-    // combine bishop and rook
-    for (int i = 0; i < boardLength; ++i) {
-         glm::ivec2 file{ current.x, i };
-        if (i != current.y) ret.push_back(file);
-    }
-    for (int i = 0; i < boardWidth; ++i) {
-         glm::ivec2 rank{ i, current.y };
-        if (i != current.x) ret.push_back(rank);
-    }
+Queen::Queen(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, pieceModel, targetShader) {}
 
-    glm::ivec2 next = current;
-    while (next.x < boardWidth && next.y < boardLength) {
-        next.x++;
-        next.y++;
-        ret.push_back(next);
-    }
-    next = current;
-    while (next.x >= 0 && next.y < boardLength) {
-        next.x--;
-        next.y++;
-        ret.push_back(next);
-    }
-    next = current;
-    while (next.x < boardWidth && next.y >= 0) {
-        next.x++;
-        next.y--;
-        ret.push_back(next);
-    }
-    next = current;
-    while (next.x >= 0 && next.y >= 0) {
-        next.x--;
-        next.y--;
-        ret.push_back(next);
-    }
-    return ret;
+std::vector<glm::ivec2> Queen::getMoves(int xLimit, int yLimit) {
+	std::vector<glm::ivec2> moves;
+	std::vector<glm::ivec2> testVecs = { glm::ivec2(1,1), glm::ivec2(-1,1), glm::ivec2(-1,-1), glm::ivec2(1,-1), glm::ivec2(1,0), glm::ivec2(-1,0), glm::ivec2(0,1), glm::ivec2(0,-1) };
+	glm::ivec2 test;
+
+	for (int i = 0; i < testVecs.size(); i++) {//for each vector
+		for (int j = 1; ; j++) {//test positive scalar multiples
+			test = position + (j * testVecs[i]);
+			if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) {
+				moves.push_back(glm::vec2(test));
+			}
+			else {
+				break;
+			}
+		}
+	}
+
+	return moves;
 }
