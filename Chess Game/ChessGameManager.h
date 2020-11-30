@@ -2,6 +2,7 @@
 #define GAMEMANAGER_H
 
 #include <vector>
+#include "GlobalTypes.h"
 
 class GameState;
 class Player;

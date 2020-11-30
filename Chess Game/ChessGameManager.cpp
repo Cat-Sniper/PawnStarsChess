@@ -31,7 +31,7 @@ void ChessGameManager::Init()
 
 	//TESTING STUFF - DELETE LATER
 	_currentPlayer = _players.at(0);
-	_gameBoard = new ChessBoard(this);
+	//_gameBoard = new ChessBoard(this);
 }
 
 void ChessGameManager::Update(float deltaTime)
@@ -49,7 +49,7 @@ void ChessGameManager::Render()
 	for (auto& player : _players) {
 
 		for (auto& chessPiece : player->getPieces()) {
-			if (chessPiece->isAlive()) {
+			if (chessPiece->getAlive()) {
 				// chessPiece->Render();
 			}
 		}
@@ -72,6 +72,8 @@ Player* ChessGameManager::getPlayerWithID(int id)
 	for (auto& player : _players) {
 		if (player->getID() == id) return player;
 	}
+
+	return nullptr;
 }
 
 

@@ -26,6 +26,6 @@ public:
 	void boardInit();
 
 	ChessPiece* getPieceAtLocation(glm::ivec2 pos) { return _board[pos.x][pos.y].getCurrentChessPiece(); }
-	std::vector<glm::ivec2> highlightMoves(ChessPiece *piece, glm::ivec2 current, int boardWidth = 8, int boardLength = 8);
+	std::vector<glm::ivec2> highlightMoves(ChessPiece *piece);
 
 };

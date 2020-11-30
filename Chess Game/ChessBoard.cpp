@@ -102,29 +102,31 @@ ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 
 	if (pieceType == "bishop")
 	{
-		return new Bishop(playerID);
+		//return new Bishop(playerID);
 	}
 	else if (pieceType == "king")
 	{
-		return new King(playerID);
+		//return new King(playerID);
 	}
 	else if (pieceType == "knight")
 	{
-		return new Knight(playerID);
+		//return new Knight(playerID);
 	}
 	else if (pieceType == "pawn")
 	{
-		return new Pawn(playerID);
+		//return new Pawn(playerID);
 	}
 	else if (pieceType == "queen")
 	{
-		return new Queen(playerID);
+		//return new Queen(playerID);
 	}
 	else if (pieceType == "rook")
 	{
 
-		return new Rook(playerID);
+		//return new Rook(playerID);
 	}
+
+	return nullptr;
 }
 
 ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
@@ -156,9 +158,9 @@ ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on
 	}
 }
 
-std::vector<glm::ivec2> ChessBoard::highlightMoves(ChessPiece *piece, glm::ivec2 current, int boardWidth, int boardLength)
+std::vector<glm::ivec2> ChessBoard::highlightMoves(ChessPiece *piece)
 {
-	std::vector<glm::ivec2> moveList = piece->highlightMoves(current, boardWidth, boardLength);
+	std::vector<glm::ivec2> moveList = piece->getMoves(BOARD_WIDTH, BOARD_HEIGHT);
 
 	for (int i = 0; i < moveList.size(); i++)
 	{

@@ -4,19 +4,18 @@
 /// Created: Oct. 8, 2020
 /// Edited:  Oct. 8, 2020
 
-#include <GL\glew.h>
 #include <Windows.h>
 #include <cstdio>
 #include <string>
 #include <iostream>
+
+#include <GL\glew.h>
 #include <glfw3.h>
-#include <iostream>
-#include "Texture.h"
-#include "Model.h"
-#include "Shader.h"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <math.h>
+
+#include "Texture.h"
+
+#include "GlobalTypes.h"
 
 #include "ChessGameManager.h"
 #include "Player.h"
@@ -27,7 +26,6 @@
 #include "Knight.h"
 #include "Pawn.h"
 #include "Rook.h"
-#include "GlobalTypes.h"
 #include "Camera.h"
 
 // Internal globals for timing
@@ -36,12 +34,16 @@ __int64 gCounterStart = 0;
 double gLastFrame;
 
 // Game manager - controls game stuff
-ChessGameManager* gameManager;
+//ChessGameManager* gameManager;
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 glm::vec3 cameraPos = glm::vec3(3.5f, -3.5f, 7.0f);
 glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
+glm::vec3 cameraTarget = glm::vec3(3.5f, 3.5f, 0.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
+
+
 
 constexpr float shift = glm::radians(40.0f);
 constexpr float clamp_max = glm::radians(90.0f);
@@ -49,6 +51,7 @@ constexpr glm::mat4 identity = glm::mat4(1.0f);
 glm::mat4 view;
 glm::mat4 projection;
 
+Camera gameCamera = Camera(cameraPos, cameraTarget, cameraUp, shift);
 /// <summary>
 /// Initializes the counter at startup
 /// </summary>
@@ -187,6 +190,7 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 		
 		// TODO: Finish colliders.
 		// For each piece in active player:
+		/*
 		if (gameManager->getCurrentPlayer()->getPieces().size() > 0) {
 			for (std::vector<ChessPiece*>::iterator it = std::begin(gameManager->getCurrentPlayer()->getPieces()); it != std::end(gameManager->getCurrentPlayer()->getPieces()); ++it) {
 
@@ -202,7 +206,7 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 				}
 			}
 
-			closestPieceClicked->setSelection(true);
+			closestPieceClicked->setSelected(true);
 			std::string str = std::to_string((int)closestPieceClicked->getPosition().x);
 			std::cout << str << std::endl;
 		}
@@ -210,7 +214,7 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 			std::cout << "Aint no chess pieces around here..." << std::endl;
 		}
 
-		
+		*/
 
 		/* code from tutorial - clicking on spheres.... reference until i get this shit working
 		for (int i = 0; i < NUM_SPHERES; i++) {
@@ -233,22 +237,12 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
-glm::vec3 cameraPos = glm::vec3(3.5f, -3.5f, 7.0f);
-glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
-glm::vec3 cameraTarget = glm::vec3(3.5f, 3.5f, 0.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, 1.0f);
 
-
-Camera gameCamera = Camera(cameraPos, cameraTarget, cameraUp, shift);
 
 int main() {
 	
 #pragma region _setup
-	std::string relativePath = "../Chess Game/Dependencies/";
 	
-
 	if (!glfwInit()) return -1;
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -275,7 +269,7 @@ int main() {
 
 	glfwSetMouseButtonCallback(window, glfw_mouse_click_callback);
 #pragma endregion
-	gameManager = new ChessGameManager();
+	//gameManager = new ChessGameManager();
 
 #pragma region cubeBuffer
 	float cubeVertices[] = {
@@ -342,7 +336,7 @@ int main() {
 #pragma endregion
 
 	//Textures
-	Texture cubeTextures[2] = {Texture(relativePath + "blackMarble.jpg", GL_RGB, 0), Texture(relativePath + "whiteMarble.jpg", GL_RGB, 1)};
+	Texture cubeTextures[2] = {Texture(RELATIVE_PATH + "blackMarble.jpg", GL_RGB, 0), Texture(RELATIVE_PATH + "whiteMarble.jpg", GL_RGB, 1)};
 
 	//Matricies
 	glm::mat4 models[64];
@@ -369,16 +363,10 @@ int main() {
 
 	//Models
 
-	std::vector<std::string> modelFiles = {"King.obj", "Queen.obj", "Bishop.obj", "knight.obj", "Rook.obj", "Pawn.obj"};//this will be the order used for the co-related vectors
 	std::vector<Model> pieceModels;
 	std::vector<std::vector<glm::vec3>> modelPositions = std::vector<std::vector<glm::vec3>>(6);//latter half of sub-vector is "black", fore half is "white"
 	std::vector<std::vector<glm::mat4>> modelRSMats = std::vector<std::vector<glm::mat4>>(6);
 	std::vector<std::vector<glm::mat4>> modelNMats = std::vector<std::vector<glm::mat4>>(6);
-	
-	for (int i = 0; i < modelFiles.size(); i++) {
-		std::string path = relativePath + modelFiles[i];
-		pieceModels.push_back(Model(&path[0]));
-	}
 
 	glm::mat4 rsModel;
 	glm::vec3 redColor = glm::vec3(PLAYER1_COLOR.r, PLAYER1_COLOR.g, PLAYER1_COLOR.b);
@@ -392,20 +380,20 @@ int main() {
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 	glm::ivec2 pos = glm::ivec2(4, 0);
-	ChessPiece piece = King(0, pos, redColor, rsModel, pieceModels[0], pieceShader);
+	ChessPiece piece = King(0, pos, redColor, rsModel, pieceShader);
 	redPieces.push_back(piece);
 
 	pos = glm::ivec2(4, 7);
-	piece = King(1, pos, blueColor, rsModel, pieceModels[0], pieceShader);
+	piece = King(1, pos, blueColor, rsModel, pieceShader);
 	bluePieces.push_back(piece);
 
 	//queens
 
 	pos = glm::ivec2(3, 0);
-	redPieces.push_back(Queen(0, pos, redColor, rsModel, pieceModels[1], pieceShader));
+	redPieces.push_back(Queen(0, pos, redColor, rsModel, pieceShader));
 
 	pos = glm::ivec2(3, 7);
-	bluePieces.push_back(Queen(1, pos, blueColor, rsModel, pieceModels[1], pieceShader));
+	bluePieces.push_back(Queen(1, pos, blueColor, rsModel, pieceShader));
 
 	//bishops
 
@@ -413,14 +401,14 @@ int main() {
 	rsModel = glm::scale(rsModel, glm::vec3(0.3f, 0.3f, 0.3f));
 
 	pos = glm::ivec2(2, 0);
-	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceModels[2], pieceShader));
+	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceShader));
 	pos = glm::ivec2(5, 0);
-	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceModels[2], pieceShader));
+	redPieces.push_back(Bishop(0, pos, redColor, rsModel, pieceShader));
 	
 	pos = glm::ivec2(2, 7);
-	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceModels[2], pieceShader));
+	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceShader));
 	pos = glm::ivec2(5, 7);
-	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceModels[2], pieceShader));
+	bluePieces.push_back(Bishop(1, pos, blueColor, rsModel, pieceShader));
 
 	//knights
 
@@ -429,18 +417,18 @@ int main() {
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 
 	pos = glm::ivec2(1, 0);
-	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceModels[3], pieceShader));
+	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceShader));
 	pos = glm::ivec2(6, 0);
-	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceModels[3], pieceShader));
+	redPieces.push_back(Knight(0, pos, redColor, rsModel, pieceShader));
 
 	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	rsModel = glm::rotate(rsModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 	
 	pos = glm::ivec2(1, 7);
-	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceModels[3], pieceShader));
+	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceShader));
 	pos = glm::ivec2(6, 7);
-	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceModels[3], pieceShader));
+	redPieces.push_back(Knight(1, pos, blueColor, rsModel, pieceShader));
 
 	//rooks
 
@@ -448,14 +436,14 @@ int main() {
 	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 	
 	pos = glm::ivec2(0, 0);
-	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceModels[4], pieceShader));
+	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceShader));
 	pos = glm::ivec2(7, 0);
-	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceModels[4], pieceShader));
+	redPieces.push_back(Rook(0, pos, redColor, rsModel, pieceShader));
 
 	pos = glm::ivec2(0, 7);
-	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceModels[4], pieceShader));
+	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceShader));
 	pos = glm::ivec2(7, 7);
-	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceModels[4], pieceShader));
+	bluePieces.push_back(Rook(1, pos, blueColor, rsModel, pieceShader));
 
 	//pawns
 
@@ -464,12 +452,12 @@ int main() {
 	
 	for (int i = 0; i < 8; i++) {
 		pos = glm::ivec2(i, 1);
-		redPieces.push_back(Pawn(0, pos, redColor, rsModel, pieceModels[5], pieceShader));
+		redPieces.push_back(Pawn(0, pos, redColor, rsModel, pieceShader));
 	}
 
 	for (int i = 0; i < 8; i++) {
 		pos = glm::ivec2(i, 6);
-		bluePieces.push_back(Pawn(1, pos, blueColor, rsModel, pieceModels[5], pieceShader));
+		bluePieces.push_back(Pawn(1, pos, blueColor, rsModel, pieceShader));
 	}
 
 #pragma region _windowLoop
@@ -478,7 +466,7 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(window);
-		gameManager->Update(deltaTime);
+		//gameManager->Update(deltaTime);
 		//view = glm::lookAt(cameraPos, glm::vec3(3.5f, 3.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 		view = gameCamera.getViewMat();
 
@@ -525,7 +513,7 @@ int main() {
 #pragma region termination_cleanup
 	glfwTerminate();
 
-	delete gameManager;
+	//delete gameManager;
 	return 0;
 #pragma endregion
 }

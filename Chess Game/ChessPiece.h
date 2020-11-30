@@ -8,12 +8,15 @@
 #define CHESSPIECE_H
 
 #include "GlobalTypes.h"
+
 #include "Model.h"
 #include "Shader.h"
+
 #include <vector>
 
 
-class ChessPiece {
+class ChessPiece {	
+
 protected:
 	int _playerID;
 	bool _isAttacked;
@@ -22,45 +25,44 @@ protected:
 	bool _selected;
 	glm::ivec2 _position;
 	glm::vec3 _color;
-	Model* _pieceModel;
 	Shader* _targetShader;
 	glm::mat4 _rsMat;
 	glm::mat4 _nMat;
+	Model _pieceModel;
 
 public:
-	ChessPiece(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader);
+	ChessPiece(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Shader& targetShader);
 
-	inline int getPlayerID();
+	int getPlayerID();
 	void setPlayerID(int newPlayerID);
 
-	inline bool getAttacked();
+	bool getAttacked();
 	void setAttacked(bool attacked);
 
-	inline bool getMoved();
+	bool getMoved();
 	void setMoved(bool moved);
 
-	inline bool getAlive();
+	bool getAlive();
 	void setAlive(bool alive);
 
-	inline bool getSelected();
+	bool getSelected();
 	void setSelected(bool selected);
 
-	inline glm::ivec2 getPosition();
+	glm::ivec2 getPosition();
 	void setPosition(glm::ivec2 newPos);
 
-	inline glm::vec3 getColor();
+	glm::vec3 getColor();
 	void setColor(glm::vec3& newColor);
 
-	inline Model* getModelPtr();
-	void setModelPtr(Model* newModelPtr);
+	Model getModel();		
 
 	inline Shader* getShaderPtr();
 	void setShaderPtr(Shader* newShaderPtr);
 
-	inline glm::mat4 getRSMat();
+	glm::mat4 getRSMat();
 	void setRSMat(glm::mat4& newRSMat);
 
-	inline glm::mat4 getNMat();
+	glm::mat4 getNMat();
 	//cannot set nMat, it is based on the model matrix and will be re-derived whenever a new RSMat is assigned
 
 	static bool outOfBounds(glm::ivec2& testPos, int xLimit, int yLimit);
