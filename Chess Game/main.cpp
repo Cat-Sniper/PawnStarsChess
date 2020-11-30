@@ -150,6 +150,7 @@ bool ray_sphere(glm::vec3 ray_origin_wor, glm::vec3 ray_direction_wor, glm::vec3
 
 /* takes mouse position on screen and return ray in world coords */
 glm::vec3 get_ray_from_mouse(float mouse_x, float mouse_y) {
+
 	// screen space (viewport coordinates)
 	float x = (2.0f * mouse_x) / CHESS_WINDOW_WIDTH - 1.0f;
 	float y = 1.0f - (2.0f * mouse_y) / CHESS_WINDOW_HEIGHT;
@@ -189,27 +190,39 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 		if (gameManager->getCurrentPlayer()->getPieces().size() > 0) {
 			for (std::vector<ChessPiece*>::iterator it = std::begin(gameManager->getCurrentPlayer()->getPieces()); it != std::end(gameManager->getCurrentPlayer()->getPieces()); ++it) {
 
-				float t_dist = 0.0f;
-				if (ray_sphere(cameraPos, ray_wor, glm::vec3((*it)->getPosition(), 0.5), 0.5, &t_dist)) {
+				
+				
 
-					std::cout << "clicked on piece at (" + std::to_string((int)(*it)->getPosition().x) + ", " + std::to_string((int)(*it)->getPosition().y) + ")" << std::endl;
+				float t_dist = 0.0f;
+				glm::vec3 collider_position = glm::vec3((*it)->getPosition(), 0.75f);
+
+
+				if (ray_sphere(gameCamera.getPosition(), ray_wor, collider_position, 0.4, &t_dist)) {
+					
 					// if more than one piece is in path of ray, only use the closest one
 					if (nullptr == closestPieceClicked || t_dist < closestIntersection) {
+
 						closestPieceClicked = (*it);
 						closestIntersection = t_dist;
 					}
 				}
+				else {
+
+					// remove selection if we have clicked off this piece.
+					if ((*it)->getSelected()) (*it)->setSelected(false);
+				}
 			}
 
-			closestPieceClicked->setSelected(true);
-			std::string str = std::to_string((int)closestPieceClicked->getPosition().x);
-			std::cout << str << std::endl;
+			if (closestPieceClicked != nullptr) {
+				closestPieceClicked->setSelected(true);
+				std::string str = "clicked on piece at (" + std::to_string((int)closestPieceClicked->getPosition().x) + ", " + std::to_string((int)closestPieceClicked->getPosition().y) + ")";
+				std::cout << str << std::endl;
+				
+			}
+			else {
+				std::cout << "Aint no chess pieces around here..." << std::endl;
+			}
 		}
-		else {
-			std::cout << "Aint no chess pieces around here..." << std::endl;
-		}
-
-		
 
 		/* code from tutorial - clicking on spheres.... reference until i get this shit working
 		for (int i = 0; i < NUM_SPHERES; i++) {
@@ -348,8 +361,7 @@ int main() {
 	glm::mat4 lightModel = glm::translate(identity, lightPos);
 
 	//glm::mat4 rKingModel = glm::translate(identity, glm::vec3(4.0f, 0.0f, 0.5f));
-	//rKingModel = glm::rotate(rKingModel, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	//rKingModel = glm::scale(rKingModel, glm::vec3(0.4f, 0.4f, 0.4f));
+
 
 	Shader boardShader = Shader("texVertex.vert", "texFragment.frag");
 	Shader lightShader = Shader("lightVertex.vert", "lightFragment.frag");
@@ -362,7 +374,6 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(window);
 		gameManager->Update(deltaTime);
-		view = gameCamera.getViewMat();
 
 
 		//render calls
@@ -390,6 +401,7 @@ int main() {
 
 		//draw pieces
 		gameManager->Render(view, projection, lightPos, cameraPos);
+		view = gameCamera.getViewMat();
 
 		//Final display calls
 		glFlush();

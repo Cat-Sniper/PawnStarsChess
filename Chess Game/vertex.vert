@@ -11,7 +11,7 @@ uniform mat4 projection;
 uniform mat4 nMat;
 
 void main(){
-	vec4 hNormal = nMat * vec4(vNormal, 1.0);
+	vec4 hNormal = nMat * vec4(vNormal, 0.0);
 	
 	normal = hNormal.xyz;
 	fragPos = vec3(model * vec4(vPos, 1.0));

@@ -20,7 +20,7 @@ private:
 	ChessPiece* createBTRow(int columnPosition, int playerID);
 	ChessPiece* createChessPiece(std::string pieceType, int playerID);
 	Shader _pieceShader;
-	glm::mat4 rsModel;
+	
 
 public:
 	ChessBoard(ChessGameManager* game);

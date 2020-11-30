@@ -100,7 +100,8 @@ bool ChessBoard::isEven(int i, int j)
 
 ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 {
-	
+	glm::mat4 rsModel;
+
 	if (pieceType == "bishop")
 	{
 		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -109,37 +110,39 @@ ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 	}
 	else if (pieceType == "king")
 	{
+
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 		return new King(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "knight")
 	{
 		if (playerID == 0) {
 			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-			rsModel = glm::rotate(rsModel, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-			rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+			rsModel = glm::rotate(rsModel, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		}
 		else {
 			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-			rsModel = glm::rotate(rsModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-			rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 		}
-
+		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.45f, 0.4f));
 		return new Knight(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "pawn")
 	{
 		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.2f, 0.2f, 0.2f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.22f, 0.25f, 0.22f));
 		return new Pawn(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "queen")
 	{
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
 		return new Queen(playerID, rsModel, _pieceShader);
 	}
 	else if (pieceType == "rook")
 	{
 		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.7f, 0.4f));
 		return new Rook(playerID, rsModel, _pieceShader);
 	}
 

@@ -1,8 +1,4 @@
-﻿  ChessBoard.cpp
-  ChessGameManager.cpp
-  GameplayState.cpp
-  main.cpp
-F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(415,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-F:\Repos\PawnStars\PawnStarsChess\Chess Game\ChessBoard.cpp(176): warning C4715: 'ChessBoard::createBTRow': not all control paths return a value
+﻿  main.cpp
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(200,8): warning C4305: 'argument': truncation from 'double' to 'float'
+F:\Repos\PawnStars\PawnStarsChess\Chess Game\main.cpp(427,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Chess Game.vcxproj -> F:\Repos\PawnStars\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe

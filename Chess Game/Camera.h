@@ -18,6 +18,7 @@ public:
 
 	glm::vec3 getViewDir();
 	glm::mat4 getViewMat();
+	glm::vec3 getPosition();
 
 	void up(float delT);
 	void down(float delT);

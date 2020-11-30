@@ -38,6 +38,8 @@ void ChessPiece::setAlive(bool alive) {
 bool ChessPiece::getSelected() { return _selected; }
 void ChessPiece::setSelected(bool selected) {
 	_selected = selected;
+
+	std::cout << "changed selection at (" + std::to_string(_position.x) + ", " + std::to_string(_position.y) + ") to " + std::to_string(selected) << std::endl;
 }
 
 glm::ivec2 ChessPiece::getPosition() { return _position; }
@@ -74,16 +76,16 @@ bool ChessPiece::outOfBounds(glm::ivec2& testPos, int xLimit, int yLimit) {
 }
 
 void ChessPiece::draw(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos) {
+	
 	//bind the shader
 	_targetShader->bind();
 
 	//generate model matrix
-	glm::mat4 id = glm::mat4(1.0f);
-	glm::mat4 model = glm::translate(id, glm::vec3(_position, 0.5f));
-	model = model * _rsMat;
+	glm::mat4 model_in_worldspace = glm::translate(identity, glm::vec3(_position, 0.5f));
+	model_in_worldspace = model_in_worldspace * _rsMat;
 
 	//set necessary uniforms
-	_targetShader->setMat4Uniform("model", glm::value_ptr(model));
+	_targetShader->setMat4Uniform("model", glm::value_ptr(model_in_worldspace));
 	_targetShader->setMat4Uniform("view", glm::value_ptr(view));
 	_targetShader->setMat4Uniform("projection", glm::value_ptr(projection));
 	_targetShader->setMat4Uniform("nMat", glm::value_ptr(_nMat));

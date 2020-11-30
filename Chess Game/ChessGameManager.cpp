@@ -32,6 +32,7 @@ void ChessGameManager::Init()
 	//TESTING STUFF - DELETE LATER
 	_currentPlayer = _players.at(0);
 	_gameBoard = new ChessBoard(this);
+
 }
 
 void ChessGameManager::Update(float deltaTime)

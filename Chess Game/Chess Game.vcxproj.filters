@@ -19,27 +19,15 @@
     <Filter Include="Source Files\Pieces">
       <UniqueIdentifier>{5daa88bd-3da2-42c3-87f1-331a1b85c0d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Shaders">
+    <Filter Include="Source Files\Rendering">
       <UniqueIdentifier>{4eb0d4eb-080b-49d8-855f-0367f41aafdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{6263aa89-efdb-40eb-ae8f-0f16cde726e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cell.cpp">
@@ -81,22 +69,25 @@
     <ClCompile Include="Rook.cpp">
       <Filter>Source Files\Pieces</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="stb.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalTypes.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
       <Filter>Header Files</Filter>
@@ -140,25 +131,37 @@
     <ClInclude Include="Rook.h">
       <Filter>Header Files\Pieces</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.frag">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
     <None Include="lightVertex.vert">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
     <None Include="lightFragment.frag">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
     <None Include="texFragment.frag">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
     <None Include="texVertex.vert">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
     <None Include="vertex.vert">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </None>
   </ItemGroup>
 </Project>
