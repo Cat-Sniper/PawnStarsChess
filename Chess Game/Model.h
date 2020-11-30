@@ -9,6 +9,7 @@
 class Model
 {
 public:
+     Model() {}
     Model(char* path)
     {
         loadModel(path);

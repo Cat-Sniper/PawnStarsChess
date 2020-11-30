@@ -2,6 +2,7 @@
 #define GAMEMANAGER_H
 
 #include <vector>
+#include "GlobalTypes.h"
 
 class GameState;
 class Player;
@@ -35,7 +36,7 @@ public:
 	/// <summary>
 	/// This is where all the draw calls will be
 	/// </summary>
-	void Render();
+	void Render(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos);
 
 	/// <summary>
 	/// Cleanup for when we close the program
@@ -46,6 +47,7 @@ public:
 	/// Returns the current active player (whoever's turn it is)
 	/// </summary>
 	Player* getCurrentPlayer() { return _currentPlayer; }
+	Player* getPlayerWithID(int id);
 	ChessBoard* getBoard() { return _gameBoard; }
 };
 #endif

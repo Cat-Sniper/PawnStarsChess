@@ -1,6 +1,9 @@
 #include "Queen.h"
 
-Queen::Queen(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, pieceModel, targetShader) {}
+Queen::Queen(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
+	
+	_pieceModel = Model(&(RELATIVE_PATH + "Queen.obj")[0]);
+}
 
 std::vector<glm::ivec2> Queen::getMoves(int xLimit, int yLimit) {
 	std::vector<glm::ivec2> moves;
@@ -9,7 +12,7 @@ std::vector<glm::ivec2> Queen::getMoves(int xLimit, int yLimit) {
 
 	for (int i = 0; i < testVecs.size(); i++) {//for each vector
 		for (int j = 1; ; j++) {//test positive scalar multiples
-			test = position + (j * testVecs[i]);
+			test = _position + (j * testVecs[i]);
 			if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) {
 				moves.push_back(glm::vec2(test));
 			}

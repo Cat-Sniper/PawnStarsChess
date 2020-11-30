@@ -25,5 +25,6 @@ public:
 	void takeTurn();
 	int getID() { return _id; }
 	std::vector<ChessPiece*>& getPieces() { return _pieces; }
+	void givePiece(ChessPiece* newPiece) { _pieces.push_back(newPiece); }
 };
 #endif

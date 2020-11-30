@@ -11,6 +11,11 @@ Camera::Camera(glm::vec3 cameraPos, glm::vec3 cameraTarget, glm::vec3 cameraUp, 
 glm::vec3 Camera::getViewDir() { return cameraTarget - cameraPos; }
 glm::mat4 Camera::getViewMat() { return glm::lookAt(cameraPos, cameraTarget, cameraUp); }
 
+glm::vec3 Camera::getPosition()
+{
+	return cameraPos;
+}
+
 void Camera::up(float delT) {
 	glm::mat4 identity = glm::mat4(1.0f);
 

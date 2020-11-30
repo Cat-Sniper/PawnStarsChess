@@ -13,11 +13,18 @@ f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\main.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\knight.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\king.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\gameplaystate.obj
-f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\gamecell.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chesspiece.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chessgamemanager.obj
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chessboard.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\cell.obj
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\camera.obj
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\bishop.obj
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.exe
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.ilk
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.pdb
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\cl.command.1.tlog
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\cl.read.1.tlog
 f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\cl.write.1.tlog
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\link.command.1.tlog
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\link.read.1.tlog
+f:\repos\pawnstars\pawnstarschess\chess game\x64\debug\chess game.tlog\link.write.1.tlog
