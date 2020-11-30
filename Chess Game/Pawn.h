@@ -1,18 +1,12 @@
 #pragma once
 #include "ChessPiece.h"
 class Pawn : public ChessPiece {
+private:
+	bool initMove;
+
 public:
 
-	Pawn(int playerID) : ChessPiece(playerID) {}
-
-    /// <summary>
-    /// missing the move option when the pawn can capture enemy pieces (it does so by going diagonally forward 1 cell)
-    /// so the board must add that option when possible.
-    /// </summary>
-    /// <param name="current"></param>
-    /// <param name="boardWidth"></param>
-    /// <param name="boardLength"></param>
-    /// <returns></returns>
-    std::vector<glm::ivec2> highlightMoves(glm::ivec2 current, int boardWidth = 8, int boardLength = 8);
+	Pawn(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader);
+	std::vector<glm::ivec2> getMoves(int xLimit, int yLimit);
 };
 

@@ -1,14 +1,22 @@
 #include "Rook.h"
 
-std::vector<glm::ivec2> Rook::highlightMoves(glm::ivec2 current, int boardWidth, int boardLength) {
-    std::vector<glm::ivec2> ret;
-    for (int i = 0; i < boardLength; ++i) {
-         glm::ivec2 file{ current.x, i };
-        if (i != current.y) ret.push_back(file);
-    }
-    for (int i = 0; i < boardWidth; ++i) {
-         glm::ivec2 rank{ i, current.y };
-        if (i != current.x) ret.push_back(rank);
-    }
-    return ret;
+Rook::Rook(int playerID, glm::ivec2& position, glm::vec3& color, glm::mat4& rsMat, Model& pieceModel, Shader& targetShader) : ChessPiece(playerID, position, color, rsMat, pieceModel, targetShader) {}
+std::vector<glm::ivec2> Rook::getMoves(int xLimit, int yLimit) {
+	std::vector<glm::ivec2> moves;
+	std::vector<glm::ivec2> testVecs = { glm::ivec2(1,0), glm::ivec2(-1,0), glm::ivec2(0,1), glm::ivec2(0,-1) };
+	glm::ivec2 test;
+
+	for (int i = 0; i < testVecs.size(); i++) {
+		for (int j = 0; ; j++) {
+			test = position + (j * testVecs[i]);
+			if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) {
+				moves.push_back(glm::ivec2(test));
+			}
+			else {
+				break;
+			}
+		}
+	}
+
+	return moves;
 }
