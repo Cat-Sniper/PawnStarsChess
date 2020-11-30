@@ -7,6 +7,9 @@ ChessPiece::ChessPiece() {
     _materialColor.b = 1.0f;
     _isAttacked = 0;
     _hasMoved = 0;
+    _currentPosition = glm::ivec2(0, 0);
+    _isAlive = true;
+    _selected = false;
 }
 
 ChessPiece::ChessPiece(int playerID) : ChessPiece() {

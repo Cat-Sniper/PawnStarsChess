@@ -4,6 +4,8 @@
 /// Created Ashraf 
 #include <string>
 #include "ChessBoard.h"
+#include "ChessGameManager.h"
+#include "Player.h"
 
 // Reference headers
 #include "Bishop.h"
@@ -14,16 +16,10 @@
 #include "Queen.h"
 #include "Rook.h"
 
-//cell board array
-//highlight move method, reach into the cell and the currentchesspiece to figure out possible moves (using the piece's position)
-
-//questions: how do I merge since my Branch is behind on updates?
-//do I allocate on the heap? Is that the only way?
-//finish highlight moves class
-//have to close soln file
-
-ChessBoard::ChessBoard()
+ChessBoard::ChessBoard(ChessGameManager* game)
 {
+	_gameManager = game;
+	boardInit();
 }
 
 ChessBoard::~ChessBoard()
@@ -40,10 +36,14 @@ ChessBoard::~ChessBoard()
 
 void ChessBoard::boardInit()
 {
+	
+	
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
+			_board[i][j] = Cell();
+			
 			if (isEven(i, j)) //COLORS THE BOARD ROW BY ROW
 			{
 				_board[i][j].setBlack();
@@ -59,20 +59,25 @@ void ChessBoard::boardInit()
 				case 0: //fill bottom row, passing the column as the argument
 					_board[i][j].addChessPiece(createBTRow(j , 0));
 					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i,j));
+					_gameManager->getPlayerWithID(0)->givePiece(_board[i][j].getCurrentChessPiece());
+					
 					break;
 				case 1:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 0));
 					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
+					_gameManager->getPlayerWithID(0)->givePiece(_board[i][j].getCurrentChessPiece());
 					break;
 
 					//CASE 6 AND 7 ARE FOR PLAYER 1 (BLACK)
 				case 6:
 					_board[i][j].addChessPiece(createChessPiece("pawn", 1));
 					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
+					_gameManager->getPlayerWithID(1)->givePiece(_board[i][j].getCurrentChessPiece());
 					break;
 				case 7:
 					_board[i][j].addChessPiece(createBTRow(j, 1));
 					_board[i][j].getCurrentChessPiece()->setPosition(glm::ivec2(i, j));
+					_gameManager->getPlayerWithID(1)->givePiece(_board[i][j].getCurrentChessPiece());
 					break;
 				default: //SHOULD I KEEP THIS?
 					_board[i][j].removeChessPiece();
@@ -117,6 +122,7 @@ ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 	}
 	else if (pieceType == "rook")
 	{
+
 		return new Rook(playerID);
 	}
 }
@@ -125,26 +131,28 @@ ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on
 {
 	switch (columnPosition)
 	{
-		if (columnPosition == 0 || columnPosition == 7)
-		{
-			return createChessPiece("rook", playerID);
-		}
-		else if (columnPosition == 1 || columnPosition == 6)
-		{
-			return createChessPiece("knight", playerID);
-		}
-		else if (columnPosition == 2 || columnPosition == 5)
-		{
-			return createChessPiece("bishop", playerID);
-		}
-		else if (columnPosition == 3)
-		{
-			return createChessPiece("queen", playerID);
-		}
-		else if (columnPosition == 4)
-		{
-			return createChessPiece("king", playerID);
-		}
+	case 0:
+	case 7:
+		return createChessPiece("rook", playerID);
+	break;
+
+	case 1:
+	case 6:
+		return createChessPiece("knight", playerID);
+		break;
+
+	case 2:
+	case 5:
+		return createChessPiece("bishop", playerID);
+		break;
+
+	case 3:
+		return createChessPiece("queen", playerID);
+		break;
+
+	case 4:
+		return createChessPiece("king", playerID);
+		break;
 	}
 }
 

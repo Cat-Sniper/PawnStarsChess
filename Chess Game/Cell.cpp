@@ -10,6 +10,7 @@ Cell::Cell() //default constructor
 {
 	_isOccupied = false;
 	_currentChessPiece = nullptr; //all cells start without any chess pieces, but a chess piece can be added with a method
+	_color = Color(10, 10, 10);
 }
 
 Cell::~Cell() //default destructor

@@ -24,7 +24,6 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="ChessGameManager.cpp" />
     <ClCompile Include="ChessPiece.cpp" />
-    <ClCompile Include="GameCell.cpp" />
     <ClCompile Include="GameStates\GameplayState.cpp" />
     <ClCompile Include="King.cpp" />
     <ClCompile Include="Knight.cpp" />
@@ -45,7 +44,6 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="ChessGameManager.h" />
     <ClInclude Include="ChessPiece.h" />
-    <ClInclude Include="GameCell.h" />
     <ClInclude Include="GameStates\GameplayState.h" />
     <ClInclude Include="GameStates\GameState.h" />
     <ClInclude Include="GlobalTypes.h" />
@@ -128,6 +126,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Dependencies;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -168,12 +168,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\assimp-5.0.1\assimp-5.0.1\include;$(SolutionDir)Dependencies/GLEW/include;$(SolutionDir)Dependencies/GLFW;$(SolutionDir)Dependencies/glm;$(SolutionDir)Dependencies;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\assimp-5.0.1\assimp-5.0.1\include;$(SolutionDir)Dependencies/GLEW/include;$(SolutionDir)Dependencies/GLFW;$(SolutionDir)Dependencies/glm;$(SolutionDir)Dependencies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/GLEW/lib/Release/x64;$(SolutionDir)Dependencies/GLFW/libs;$(SolutionDir)Dependencies\assimp-5.0.1\build\code\Release;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/GLEW/lib/Release/x64;$(SolutionDir)Dependencies/GLFW/libs;$(SolutionDir)Dependencies\assimp-5.0.1\build\code\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc142-mt.lib;glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

@@ -46,6 +46,7 @@ public:
 	/// Returns the current active player (whoever's turn it is)
 	/// </summary>
 	Player* getCurrentPlayer() { return _currentPlayer; }
+	Player* getPlayerWithID(int id);
 	ChessBoard* getBoard() { return _gameBoard; }
 };
 #endif

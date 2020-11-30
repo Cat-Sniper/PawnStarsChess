@@ -84,11 +84,12 @@ public:
      inline bool isSelected() { return _selected; }
      inline void setSelection(bool select) { _selected = select; }
 
-     inline void setPosition(glm::ivec2 pos) { _currentPosition = pos; }
-     inline glm::ivec2 getPosition() { return _currentPosition; }
+     void setPosition(glm::ivec2 pos) { _currentPosition = pos; }
+     glm::ivec2 getPosition() { return _currentPosition; }
 
      inline bool isAlive() { return _isAlive; }
      inline void setAlive(bool alive) { _isAlive = alive; }
+
     /// <summary>
     /// this method calculates all the valid moves for this chess piece and returns a vector of board positions
     /// containing all the valid move positions. it does so without knowledge of the current state of the chess

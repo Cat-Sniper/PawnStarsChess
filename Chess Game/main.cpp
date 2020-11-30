@@ -7,6 +7,8 @@
 #include <GL\glew.h>
 #include <Windows.h>
 #include <cstdio>
+#include <string>
+#include <iostream>
 #include <glfw3.h>
 #include <iostream>
 #include "Texture.h"
@@ -17,6 +19,8 @@
 #include <math.h>
 
 #include "ChessGameManager.h"
+#include "Player.h"
+#include "ChessPiece.h"
 #include "GlobalTypes.h"
 
 // Internal globals for timing
@@ -25,9 +29,18 @@ __int64 gCounterStart = 0;
 double gLastFrame;
 
 // Game manager - controls game stuff
-ChessGameManager gameManager;
+ChessGameManager* gameManager;
 
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+glm::vec3 cameraPos = glm::vec3(3.5f, -3.5f, 7.0f);
+glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
 
+constexpr float shift = glm::radians(40.0f);
+constexpr float clamp_max = glm::radians(90.0f);
+constexpr glm::mat4 identity = glm::mat4(1.0f);
+glm::mat4 view;
+glm::mat4 projection;
 
 /// <summary>
 /// Initializes the counter at startup
@@ -72,7 +85,7 @@ void InitGL()
 void Display() 
 {
 	//glClear(GL_COLOR_BUFFER_BIT);
-	gameManager.Render();
+	//gameManager.Render();
 	//glFlush();
 }
 
@@ -87,33 +100,146 @@ void Idle()
 	double currentTime = GetCounter();
 	double deltaTime = currentTime - gLastFrame;
 
-	gameManager.Update((float)deltaTime);
+	//gameManager.Update((float)deltaTime);
+}
+
+/* check if a ray and a sphere intersect. if not hit, returns false. it rejects
+intersections behind the ray caster's origin, and sets intersection_distance to
+the closest intersection */
+bool ray_sphere(glm::vec3 ray_origin_wor, glm::vec3 ray_direction_wor, glm::vec3 sphere_centre_wor, float sphere_radius, float* intersection_distance) {
+	// work out components of quadratic
+	glm::vec3 dist_to_sphere = ray_origin_wor - sphere_centre_wor;
+	float b = dot(ray_direction_wor, dist_to_sphere);
+	float c = dot(dist_to_sphere, dist_to_sphere) - sphere_radius * sphere_radius;
+	float b_squared_minus_c = b * b - c;
+	// check for "imaginary" answer. == ray completely misses sphere
+	if (b_squared_minus_c < 0.0f) { return false; }
+	// check for ray hitting twice (in and out of the sphere)
+	if (b_squared_minus_c > 0.0f) {
+		// get the 2 intersection distances along ray
+		float t_a = -b + sqrt(b_squared_minus_c);
+		float t_b = -b - sqrt(b_squared_minus_c);
+		*intersection_distance = t_b;
+		// if behind viewer, throw one or both away
+		if (t_a < 0.0) {
+			if (t_b < 0.0) { return false; }
+		}
+		else if (t_b < 0.0) {
+			*intersection_distance = t_a;
+		}
+
+		return true;
+	}
+
+	// check for ray hitting once (skimming the surface)
+	if (0.0f == b_squared_minus_c) {
+		// if behind viewer, throw away
+		float t = -b + sqrt(b_squared_minus_c);
+		if (t < 0.0f) { return false; }
+		*intersection_distance = t;
+		return true;
+	}
+	// note: could also check if ray origin is inside sphere radius
+	return false;
+}
+
+/* takes mouse position on screen and return ray in world coords */
+glm::vec3 get_ray_from_mouse(float mouse_x, float mouse_y) {
+	// screen space (viewport coordinates)
+	float x = (2.0f * mouse_x) / CHESS_WINDOW_WIDTH - 1.0f;
+	float y = 1.0f - (2.0f * mouse_y) / CHESS_WINDOW_HEIGHT;
+	float z = 1.0f;
+	// normalised device space
+	glm::vec3 ray_nds = glm::vec3(x, y, z);
+	// clip space
+	glm:: vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0, 1.0);
+	// eye space
+	glm::vec4 ray_eye = glm::inverse(projection) * ray_clip;
+	ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 0.0);
+	// world space
+	glm::vec3 ray_wor = glm::vec3(glm::inverse(view) * ray_eye);
+	// don't forget to normalise the vector at some point
+	ray_wor = glm::normalize(ray_wor);
+	return ray_wor;
+}
+
+void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int mods) {
+	
+	// Note: could query if window has lost focus here
+	if (GLFW_PRESS == action) {
+		
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);
+
+		// work out ray
+		glm::vec3 ray_wor = get_ray_from_mouse((float)xpos, (float)ypos);
+		
+		// check ray against all pieces for current active player in scene
+		ChessPiece* closestPieceClicked = nullptr;
+		float closestIntersection = 0.0f;
+		
+		// TODO: Finish colliders.
+		// For each piece in active player:
+		if (gameManager->getCurrentPlayer()->getPieces().size() > 0) {
+			for (std::vector<ChessPiece*>::iterator it = std::begin(gameManager->getCurrentPlayer()->getPieces()); it != std::end(gameManager->getCurrentPlayer()->getPieces()); ++it) {
+
+				float t_dist = 0.0f;
+				if (ray_sphere(cameraPos, ray_wor, glm::vec3((*it)->getPosition(), 0.5), 0.5, &t_dist)) {
+
+					std::cout << "clicked on piece at (" + std::to_string((int)(*it)->getPosition().x) + ", " + std::to_string((int)(*it)->getPosition().y) + ")" << std::endl;
+					// if more than one piece is in path of ray, only use the closest one
+					if (nullptr == closestPieceClicked || t_dist < closestIntersection) {
+						closestPieceClicked = (*it);
+						closestIntersection = t_dist;
+					}
+				}
+			}
+
+			closestPieceClicked->setSelection(true);
+			std::string str = std::to_string((int)closestPieceClicked->getPosition().x);
+			std::cout << str << std::endl;
+		}
+		else {
+			std::cout << "Aint no chess pieces around here..." << std::endl;
+		}
+
+		
+
+		/* code from tutorial - clicking on spheres.... reference until i get this shit working
+		for (int i = 0; i < NUM_SPHERES; i++) {
+			float t_dist = 0.0f;
+			if (ray_sphere(cam_pos, ray_wor, sphere_pos_wor[i], sphere_radius, &t_dist)) {
+				// if more than one sphere is in path of ray, only use the closest one
+				if (-1 == closest_sphere_clicked || t_dist < closest_intersection) {
+					closest_sphere_clicked = i;
+					closest_intersection = t_dist;
+				}
+			}
+		} // endfor
+		g_selected_sphere = closest_sphere_clicked;
+		printf("sphere %i was clicked\n", closest_sphere_clicked);
+		*/
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
-glm::vec3 cameraPos = glm::vec3(3.5f, -3.5f, 7.0f);
-glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
 
-constexpr float shift = glm::radians(40.0f);
-constexpr float clamp_max = glm::radians(90.0f);
-constexpr glm::mat4 identity = glm::mat4(1.0f);
 
 int main() {
 	
 #pragma region _setup
 	std::string relativePath = "../Chess Game/Dependencies/";
+	
 
 	if (!glfwInit()) return -1;
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(1000, 1000, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(CHESS_WINDOW_WIDTH, CHESS_WINDOW_HEIGHT, "PawnStars Chess", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -131,7 +257,10 @@ int main() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
+
+	glfwSetMouseButtonCallback(window, glfw_mouse_click_callback);
 #pragma endregion
+	gameManager = new ChessGameManager();
 
 #pragma region cubeBuffer
 	float cubeVertices[] = {
@@ -203,8 +332,7 @@ int main() {
 	//Matricies
 	glm::mat4 models[64];
 
-	glm::mat4 view;
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
@@ -339,6 +467,7 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		processInput(window);
+		gameManager->Update(deltaTime);
 		view = glm::lookAt(cameraPos, glm::vec3(3.5f, 3.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
 
@@ -401,6 +530,8 @@ int main() {
 
 #pragma region termination_cleanup
 	glfwTerminate();
+
+	delete gameManager;
 	return 0;
 #pragma endregion
 }
