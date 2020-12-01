@@ -42,6 +42,7 @@ void Cell::removeChessPiece()
 {
 	if (_currentChessPiece != nullptr) {
 		_currentChessPiece = nullptr;
+		_isOccupied = false;
 	}
 	
 }
@@ -49,7 +50,12 @@ void Cell::removeChessPiece()
 void Cell::deleteChessPiece()
 {
 	if (_currentChessPiece != nullptr) {
-		delete _currentChessPiece;
+		//delete _currentChessPiece;
 		removeChessPiece();
 	}
+}
+
+ChessPiece* Cell::getCurrentChessPiece()
+{
+	 return _currentChessPiece; 
 }

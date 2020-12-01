@@ -18,12 +18,6 @@ ChessGameManager::ChessGameManager()
 	_gameBoard = nullptr;
 	_selectedPiece = nullptr;
 
-	//TESTING DELETE AFTER PLACING APPROPRIATELY IN MAIN.CPP
-	Init();
-}
-
-void ChessGameManager::Init()
-{
 	_players.push_back(new Player(0));
 	_players.push_back(new Player(1));
 
@@ -31,8 +25,7 @@ void ChessGameManager::Init()
 
 	//TESTING STUFF - DELETE LATER
 	_currentPlayer = _players.at(0);
-	_gameBoard = new ChessBoard(this);
-
+	_gameBoard = new ChessBoard(*this);
 }
 
 void ChessGameManager::Update(float deltaTime)
@@ -45,6 +38,7 @@ void ChessGameManager::Update(float deltaTime)
 
 			if (_gameBoard->getCell(i, j)->getCurrentChessPiece() != nullptr && _gameBoard->getCell(i,j)->getCurrentChessPiece()->getSelected()) {
 				_selectedPiece = _gameBoard->getCell(i, j)->getCurrentChessPiece();
+				
 			}
 		}
 	}
@@ -93,6 +87,7 @@ void ChessGameManager::setCurrentPiece(ChessPiece* piece)
 {
 	if (_selectedPiece != nullptr)	_selectedPiece->setSelected(false);
 	_selectedPiece = piece;
+	validMoveSet = getBoard()->getValidatedMoves(getCurrentPiece());
 }
 
 void ChessGameManager::changeTurn()

@@ -22,8 +22,8 @@
 
 
 
-ChessBoard::ChessBoard(ChessGameManager* game) : _pieceShader("vertex.vert", "fragment.frag"), _boardShader("texVertex.vert", "texFragment.frag") {
-	_gameManager = game;
+ChessBoard::ChessBoard(ChessGameManager& game) : _boardShader("texVertex.vert", "texFragment.frag") {
+	_gameManager = &game;
 	boardInit();
 }
 
@@ -127,50 +127,51 @@ ChessPiece *ChessBoard::createChessPiece(std::string pieceType, int playerID)
 	{
 		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		rsModel = glm::scale(rsModel, glm::vec3(0.3f, 0.3f, 0.3f));
-		return new Bishop(playerID, rsModel, _pieceShader);
+return new Bishop(playerID, rsModel);
 	}
 	else if (pieceType == "king")
 	{
 
-		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-		return new King(playerID, rsModel, _pieceShader);
+	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	rsModel = glm::rotate(rsModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+	return new King(playerID, rsModel);
 	}
 	else if (pieceType == "knight")
 	{
-		if (playerID == 0) {
-			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-			rsModel = glm::rotate(rsModel, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		}
-		else {
-			rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		}
-		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.45f, 0.4f));
-		return new Knight(playerID, rsModel, _pieceShader);
+	if (playerID == 0) {
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		rsModel = glm::rotate(rsModel, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+	else {
+		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	}
+	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.45f, 0.4f));
+	return new Knight(playerID, rsModel);
 	}
 	else if (pieceType == "pawn")
 	{
-		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.22f, 0.25f, 0.22f));
-		return new Pawn(playerID, rsModel, _pieceShader);
+	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	rsModel = glm::scale(rsModel, glm::vec3(0.22f, 0.25f, 0.22f));
+	return new Pawn(playerID, rsModel);
 	}
 	else if (pieceType == "queen")
 	{
-		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
-		return new Queen(playerID, rsModel, _pieceShader);
+	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.4f, 0.4f));
+	return new Queen(playerID, rsModel);
 	}
 	else if (pieceType == "rook")
 	{
-		rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.7f, 0.4f));
-		return new Rook(playerID, rsModel, _pieceShader);
+	rsModel = glm::rotate(identity, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	rsModel = glm::scale(rsModel, glm::vec3(0.4f, 0.7f, 0.4f));
+	return new Rook(playerID, rsModel);
 	}
 
 	return nullptr;
 }
 
-ChessPiece *ChessBoard::createBTRow(int columnPosition, int playerID) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
+ChessPiece* ChessBoard::createBTRow(int columnPosition, int playerID) //based on position in the column (PASS j) it will create the subsequent chess piece, NOTE player 0 is white 1 is black
 {
 	switch (columnPosition)
 	{
@@ -219,19 +220,24 @@ void ChessBoard::movePiece(glm::ivec2 pos1, glm::ivec2 pos2)
 /// </summary>
 /// <param name="piece">the currently selected chess piece</param>
 /// <returns> a vector with all the moves the player can make</returns>
-std::vector<glm::ivec2> ChessBoard::getValidatedMoves(ChessPiece *piece)
+std::vector<glm::ivec2> ChessBoard::getValidatedMoves(ChessPiece* piece)
 {
-	std::vector<glm::ivec2> moveList = piece->getMoves(BOARD_WIDTH, BOARD_HEIGHT);
+	std::vector<glm::ivec2> moveList;
+	if (piece != nullptr) {
+		moveList = piece->getMoves(piece->getPosition(), BOARD_WIDTH, BOARD_HEIGHT);
+		if (moveList.size() > 0) {
+			auto i = moveList.begin();
+			while (i != moveList.end()) {
+				glm::ivec2 pos = (*i);
 
-	for (int i = 0; i < moveList.size(); i++)
-	{
-		glm::ivec2 pos = moveList[i]; // if it's occupied by the same player
-		if (_board[pos.x][pos.y].isOccupied() && _board[pos.x][pos.y].getCurrentChessPiece()->getPlayerID() == piece->getPlayerID())
-		{
-			moveList.erase(moveList.begin()); //remove the position from the list of positions
+				if (_board[pos.x][pos.y].isOccupied() && _board[pos.x][pos.y].getCurrentChessPiece()->getPlayerID() == piece->getPlayerID())
+				{
+					i = moveList.erase(i);
+				}
+				else ++i;
+			}
 		}
 	}
-
 	return moveList;
 }
 

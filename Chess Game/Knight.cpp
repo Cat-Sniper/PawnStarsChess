@@ -1,18 +1,28 @@
 #include "Knight.h"
 
-Knight::Knight(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
+Knight::Knight(int playerID, glm::mat4 rsMat) : ChessPiece(playerID, rsMat) {
 
 	_pieceModel = Model(&(RELATIVE_PATH + "knight.obj")[0]);
 }
-std::vector<glm::ivec2> Knight::getMoves(int xLimit, int yLimit) {
-	std::vector<glm::ivec2> moves;
-	std::vector<glm::ivec2> testVecs = { glm::ivec2(2, 1), glm::ivec2(1,2), glm::ivec2(2, -1), glm::ivec2(1, -2), glm::ivec2(-1, -2), glm::ivec2(-2, -1), glm::ivec2(-2, 1), glm::ivec2(-1, 2) };
-	glm::ivec2 test;
+std::vector<glm::ivec2> Knight::getMoves(glm::ivec2 current, int xLimit, int yLimit) {
+	
+	std::vector<glm::ivec2> ret;
 
-	for (int i = 0; i < testVecs.size(); i++) {
-		test = _position + testVecs[i];
-		if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) moves.push_back(glm::ivec2(test));
+	ret.push_back(glm::ivec2{ current.x - 2, current.y - 1 });
+	ret.push_back(glm::ivec2{ current.x - 1, current.y - 2 });
+	ret.push_back(glm::ivec2{ current.x + 2, current.y - 1 });
+	ret.push_back(glm::ivec2{ current.x + 1, current.y - 2 });
+	ret.push_back(glm::ivec2{ current.x + 2, current.y + 1 });
+	ret.push_back(glm::ivec2{ current.x + 1, current.y + 2 });
+	ret.push_back(glm::ivec2{ current.x - 2, current.y + 1 });
+	ret.push_back(glm::ivec2{ current.x - 1, current.y + 2 });
+
+	auto i = ret.begin();
+	while (i != ret.end()) {
+		if (outOfBounds((*i), xLimit, yLimit)) i = ret.erase(i);
+		else ++i;
 	}
+	
 
-	return moves;
+	return ret;
 }

@@ -21,6 +21,6 @@ public:
 	void removeChessPiece();
 	void deleteChessPiece();
 	bool isOccupied() { return _isOccupied; }
-	ChessPiece* getCurrentChessPiece() { return _currentChessPiece; }
+	ChessPiece* getCurrentChessPiece();
 
 };

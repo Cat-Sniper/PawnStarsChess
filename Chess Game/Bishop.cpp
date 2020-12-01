@@ -1,25 +1,33 @@
 #include "Bishop.h"
 
-Bishop::Bishop(int playerID, glm::mat4& rsMat, Shader& targetShader) : ChessPiece(playerID, rsMat, targetShader) {
+Bishop::Bishop(int playerID, glm::mat4 rsMat) : ChessPiece(playerID, rsMat) {
 	_pieceModel = Model(&(RELATIVE_PATH + "Bishop.obj")[0]);
 }
-std::vector<glm::ivec2> Bishop::getMoves(int xLimit, int yLimit) {
-	std::vector<glm::ivec2> moves;
-	std::vector<glm::ivec2> testVecs = { glm::ivec2(1,1), glm::ivec2(-1,1), glm::ivec2(-1,-1), glm::ivec2(1,-1) };
-	glm::ivec2 test;
-
-	for (int i = 0; i < testVecs.size(); i++) {//for each vector
-		for (int j = 1; ; j++) {//test positive scalar multiples
-			test = _position + (j * testVecs[i]);
-			if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) {
-				moves.push_back(glm::vec2(test));
-				std::cout << "potential move at (" + std::to_string(test.x) + ", " + std::to_string(test.y) + ")" << std::endl;
-			}
-			else {
-				break;
-			}
-		}
-	}
-
-	return moves;
+std::vector<glm::ivec2> Bishop::getMoves(glm::ivec2 current, int xLimit, int yLimit) {
+     std::vector<glm::ivec2> ret;
+     glm::ivec2 next = current;
+     while (next.x < xLimit && next.y < yLimit) {
+          next.x++;
+          next.y++;
+          ret.push_back(next);
+     }
+     next = current;
+     while (next.x >= 0 && next.y < yLimit) {
+          next.x--;
+          next.y++;
+          ret.push_back(next);
+     }
+     next = current;
+     while (next.x < xLimit && next.y >= 0) {
+          next.x++;
+          next.y--;
+          ret.push_back(next);
+     }
+     next = current;
+     while (next.x >= 0 && next.y >= 0) {
+          next.x--;
+          next.y--;
+          ret.push_back(next);
+     }
+     return ret;
 }

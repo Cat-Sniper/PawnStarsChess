@@ -15,7 +15,6 @@ class ChessBoard
 private:
 	Cell _board[8][8];
 	ChessGameManager* _gameManager;
-	Shader _pieceShader;
 	Shader _boardShader; 
 	glm::mat4 models[64];
 
@@ -72,7 +71,7 @@ private:
 	
 	
 public:
-	ChessBoard(ChessGameManager* game);
+	ChessBoard(ChessGameManager& game);
 	void drawBoard(glm::mat4 view, glm::mat4 projection, glm::vec3 lightPos, glm::vec3 viewPos);
 	void drawHighlights(glm::mat4 view, glm::mat4 projection, glm::vec3 lightPos, glm::vec3 viewPos);
 	~ChessBoard();

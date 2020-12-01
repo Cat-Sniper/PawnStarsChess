@@ -161,15 +161,15 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 				for (int j = 0; j < 8; j++) {
 
 					float t_dist = 0.0f;
-
 					glm::vec3 cell_collider = glm::vec3(i, j, 0.5f);
 
 					// if clicked on the cell and there is a selected piece
-					if (ray_sphere(gameCamera.getPosition(), ray_wor, cell_collider, 0.3, &t_dist)) {
+					if (ray_sphere(gameCamera.getPosition(), ray_wor, cell_collider, 0.4, &t_dist)) {
 
 						if (closestClickedCell == nullptr || t_dist < closestIntersection_cell) {
 
 							closestClickedCell = gameManager->getBoard()->getCell(i, j);
+
 							clickedCellPos = glm::ivec2(i, j);
 							closestIntersection_cell = t_dist;
 
@@ -204,26 +204,25 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 				}
 
 			}
-
-			// if clicked on a piece
-			if (closestPieceClicked != nullptr) {
-				
-			}
 			
 		}
 
 		// after both..
 		// The cell is closer than the piece.
-		if (closestIntersection_cell < closestIntersection_piece && closestClickedCell != nullptr) {
+		if (closestIntersection_cell < closestIntersection_piece || closestIntersection_piece == 0.0f  && closestClickedCell != nullptr ) {
 
-			if (gameManager->getCurrentPiece() != nullptr) {
 
 				std::string str1 = "CELL at (" + std::to_string(clickedCellPos.x) + ", " + std::to_string(clickedCellPos.y) + ")";
 				std::cout << str1 << std::endl;
 
-				// check all the validated moves to see if this was an available move.
-				std::vector<glm::ivec2> validMoveSet = gameManager->getBoard()->getValidatedMoves(gameManager->getCurrentPiece());
 
+			// check all the validated moves to see if this was an available move.
+			if (gameManager->getCurrentPiece() != nullptr) {
+
+				std::string str2 = "got inside.";
+				std::cout << str2 << std::endl;
+
+				std::vector<glm::ivec2> validMoveSet = gameManager->getValidMoveSet();
 				for (std::vector<glm::ivec2>::iterator it = std::begin(validMoveSet); it != std::end(validMoveSet); ++it) {
 					std::string str = "valid move (" + std::to_string((*it).x) + ", " + std::to_string((*it).y) + ")";
 					std::cout << str << std::endl;
@@ -246,6 +245,7 @@ void glfw_mouse_click_callback(GLFWwindow* window, int button, int action, int m
 		// nothing
 		else {
 			std::cout << "Aint no pieces or board around here..." << std::endl;
+			gameManager->setCurrentPiece(nullptr);
 		}
 
 	}
@@ -323,9 +323,8 @@ int main() {
 	glfwSetMouseButtonCallback(window, glfw_mouse_click_callback);
 #pragma endregion
 
+	gameManager = new ChessGameManager;
 	unsigned int cubeIndicies[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 };
-
-	gameManager = new ChessGameManager();
 	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 	view = gameCamera.getViewMat();
 

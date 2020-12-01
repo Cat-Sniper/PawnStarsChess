@@ -25,13 +25,13 @@ protected:
 	bool _selected;
 	glm::ivec2 _position;
 	glm::vec3 _color;
-	Shader* _targetShader;
+	Shader _targetShader;
 	glm::mat4 _rsMat;
 	glm::mat4 _nMat;
 	Model _pieceModel;
 
 public:
-	ChessPiece(int playerID, glm::mat4& rsMat, Shader& targetShader);
+	ChessPiece(int playerID, glm::mat4 rsMat);
 
 	int getPlayerID();
 	void setPlayerID(int newPlayerID);
@@ -68,7 +68,7 @@ public:
 	static bool outOfBounds(glm::ivec2& testPos, int xLimit, int yLimit);
 	void draw(glm::mat4 view, glm::mat4 projection, glm::vec3 lightPos, glm::vec3 viewPos);
 
-	virtual std::vector<glm::ivec2> getMoves(int xLimit, int yLimit);
+	virtual std::vector<glm::ivec2> getMoves(glm::ivec2 current, int xLimit, int yLimit);
 };   
 
 #endif  // CHESSPIECE_H
