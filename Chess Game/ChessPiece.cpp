@@ -38,8 +38,6 @@ void ChessPiece::setAlive(bool alive) {
 bool ChessPiece::getSelected() { return _selected; }
 void ChessPiece::setSelected(bool selected) {
 	_selected = selected;
-
-	std::cout << "changed selection at (" + std::to_string(_position.x) + ", " + std::to_string(_position.y) + ") to " + std::to_string(selected) << std::endl;
 }
 
 glm::ivec2 ChessPiece::getPosition() { return _position; }
@@ -75,7 +73,7 @@ bool ChessPiece::outOfBounds(glm::ivec2& testPos, int xLimit, int yLimit) {
 	return true;
 }
 
-void ChessPiece::draw(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos) {
+void ChessPiece::draw(glm::mat4 view, glm::mat4 projection, glm::vec3 lightPos, glm::vec3 viewPos) {
 	
 	//bind the shader
 	_targetShader->bind();

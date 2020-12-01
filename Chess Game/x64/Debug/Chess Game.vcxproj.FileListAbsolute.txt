@@ -1,4 +1,2 @@
-D:\Code Monkeys\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe
-D:\Code Monkeys\PawnStarsChess\Chess Game\x64\Debug\Chess Game.pdb
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\x64\Debug\Chess Game.exe
 F:\Repos\PawnStars\PawnStarsChess\Chess Game\x64\Debug\Chess Game.pdb

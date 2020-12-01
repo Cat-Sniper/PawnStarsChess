@@ -40,18 +40,30 @@ void ChessGameManager::Update(float deltaTime)
 	_currentGameState->HandleInput(*this);
 	_currentGameState->Update(*this, deltaTime);
 
+	for (int i = 0; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
+
+			if (_gameBoard->getCell(i, j)->getCurrentChessPiece() != nullptr && _gameBoard->getCell(i,j)->getCurrentChessPiece()->getSelected()) {
+				_selectedPiece = _gameBoard->getCell(i, j)->getCurrentChessPiece();
+			}
+		}
+	}
+
 	_currentPlayer->takeTurn();
 }
 
-void ChessGameManager::Render(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos)
+void ChessGameManager::Render(glm::mat4 view, glm::mat4 projection,  glm::vec3 viewPos)
 {
-	//_gameBoard->Render();
+	_gameBoard->drawBoard(view, projection, light.getPos(), viewPos);
+	light.applyLight(view, projection);
+	_gameBoard->drawHighlights(view, projection, light.getPos(), viewPos);
 
+	// render pieces
 	for (auto& player : _players) {
 
 		for (auto& chessPiece : player->getPieces()) {
 			if (chessPiece->getAlive()) {
-				 chessPiece->draw(view, projection, lightPos, viewPos);
+				 chessPiece->draw(view, projection, light.getPos(), viewPos);
 			}
 		}
 	}
@@ -75,6 +87,18 @@ Player* ChessGameManager::getPlayerWithID(int id)
 	}
 
 	return nullptr;
+}
+
+void ChessGameManager::setCurrentPiece(ChessPiece* piece)
+{
+	if (_selectedPiece != nullptr)	_selectedPiece->setSelected(false);
+	_selectedPiece = piece;
+}
+
+void ChessGameManager::changeTurn()
+{
+	if ( _currentPlayer->getID() == 0 )	_currentPlayer = _players.at(1);
+	else								_currentPlayer = _players.at(0);
 }
 
 

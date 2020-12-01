@@ -23,7 +23,7 @@ void Shader::unbind() const {
 void Shader::setMat4Uniform(std::string uniname, const GLfloat* value) {
     int uniLoc = glGetUniformLocation(shaderProgramID, uniname.c_str());
     glUniformMatrix4fv(uniLoc, 1, GL_FALSE, value);
-}
+} 
 
 void Shader::setIntUniform(std::string uniname, GLint value) {
     int uniLoc = glGetUniformLocation(shaderProgramID, uniname.c_str());

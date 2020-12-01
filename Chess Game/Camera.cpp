@@ -1,6 +1,15 @@
 #include "Camera.h"
 
-Camera::Camera(glm::vec3 cameraPos, glm::vec3 cameraTarget, glm::vec3 cameraUp, float shift) {
+Camera::Camera()
+{
+	cameraPos = glm::vec3(0, 0, 0);
+	cameraTarget = glm::vec3(0, 0, 0);
+	cameraUp = glm::vec3(0, 0, 0);
+	cameraRight = glm::vec3(0, 0, 0);
+	shift = 0;
+}
+
+Camera::Camera(glm::vec3 cameraPos, glm::vec3 cameraTarget, glm::vec3 cameraUp, float shift) : Camera() {
 	this->cameraPos = cameraPos;
 	this->cameraTarget = cameraTarget;
 	this->cameraUp = cameraUp;

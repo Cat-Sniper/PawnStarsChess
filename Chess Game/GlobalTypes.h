@@ -29,7 +29,7 @@ struct Character {
 
 // GLOBAL CONSTANTS
 const Color PLAYER1_COLOR = Color(255 / 255.0f, 254 / 255.0f, 238 / 255.0f);
-const Color PLAYER2_COLOR = Color(0.5, 0.5, 0.5);
+const Color PLAYER2_COLOR = Color(152 / 255.0f, 99 / 255.0f, 59 / 255.0f);
 const std::string RELATIVE_PATH = "../Chess Game/Dependencies/";
 
 

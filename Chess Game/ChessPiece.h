@@ -66,7 +66,7 @@ public:
 	//cannot set nMat, it is based on the model matrix and will be re-derived whenever a new RSMat is assigned
 
 	static bool outOfBounds(glm::ivec2& testPos, int xLimit, int yLimit);
-	void draw(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos);
+	void draw(glm::mat4 view, glm::mat4 projection, glm::vec3 lightPos, glm::vec3 viewPos);
 
 	virtual std::vector<glm::ivec2> getMoves(int xLimit, int yLimit);
 };   

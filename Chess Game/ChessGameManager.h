@@ -4,6 +4,7 @@
 #include <vector>
 #include "GlobalTypes.h"
 
+#include "Light.h"
 class GameState;
 class Player;
 class ChessBoard;
@@ -17,6 +18,8 @@ private:
 	Player* _currentPlayer;
 	ChessBoard* _gameBoard;
 	ChessPiece* _selectedPiece;
+	Light light;
+	
 
 public:
 
@@ -36,7 +39,7 @@ public:
 	/// <summary>
 	/// This is where all the draw calls will be
 	/// </summary>
-	void Render(glm::mat4& view, glm::mat4& projection, glm::vec3& lightPos, glm::vec3& viewPos);
+	void Render(glm::mat4 view, glm::mat4 projection, glm::vec3 viewPos);
 
 	/// <summary>
 	/// Cleanup for when we close the program
@@ -49,5 +52,8 @@ public:
 	Player* getCurrentPlayer() { return _currentPlayer; }
 	Player* getPlayerWithID(int id);
 	ChessBoard* getBoard() { return _gameBoard; }
+	ChessPiece* getCurrentPiece() { return _selectedPiece; }
+	void setCurrentPiece(ChessPiece* piece); 
+	void changeTurn();
 };
 #endif

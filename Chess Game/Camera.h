@@ -14,6 +14,7 @@ private:
 	float shift;
 
 public:
+	Camera();
 	Camera(glm::vec3 cameraPos, glm::vec3 cameraTarget, glm::vec3 cameraUp, float shift);
 
 	glm::vec3 getViewDir();

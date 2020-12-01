@@ -13,6 +13,7 @@ std::vector<glm::ivec2> Bishop::getMoves(int xLimit, int yLimit) {
 			test = _position + (j * testVecs[i]);
 			if (!ChessPiece::outOfBounds(test, xLimit, yLimit)) {
 				moves.push_back(glm::vec2(test));
+				std::cout << "potential move at (" + std::to_string(test.x) + ", " + std::to_string(test.y) + ")" << std::endl;
 			}
 			else {
 				break;
